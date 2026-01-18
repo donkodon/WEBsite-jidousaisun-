@@ -201,9 +201,9 @@
                 const result = await response.json();
                 
                 // Display result
-                if (result.success && result.image) {
-                    processedImageUrl = result.image;
-                    resultImage.src = result.image;
+                if (result.success && result.image_data) {
+                    processedImageUrl = result.image_data;
+                    resultImage.src = result.image_data;
                     resultImage.classList.remove('hidden');
                     downloadBtn.disabled = false;
                 } else {

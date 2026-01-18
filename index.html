@@ -2053,10 +2053,12 @@
                         const result = await response.json();
                         console.log('✅ API Response:', result);
                         
-                        if (result.success && result.image) {
-                            // Data URLとして返ってくる
-                            resolve(result.image);
+                        if (result.success && result.image_data) {
+                            // image_dataとして返ってくる
+                            console.log('🎉 Background removed successfully');
+                            resolve(result.image_data);
                         } else {
+                            console.error('❌ Result structure:', result);
                             throw new Error(result.error || 'Background removal failed');
                         }
                     } catch (error) {

@@ -917,7 +917,7 @@
                                             <p class="text-sm font-semibold text-gray-900 mb-1" id="imageFileName">ファイル名</p>
                                             <p class="text-xs text-gray-500 mb-3" id="imageFileSize">サイズ: 0KB</p>
                                             <div class="flex gap-2">
-                                                <button onclick="applyUploadedImage()" class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition duration-200">
+                                                <button onclick="applyUploadedImage(event)" class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition duration-200">
                                                     <i class="fa-solid fa-check mr-1"></i>
                                                     適用する
                                                 </button>
@@ -1959,18 +1959,27 @@
             reader.readAsDataURL(file);
         }
         
-        async function applyUploadedImage() {
-            if (!uploadedImageData || !originalImageFile) return;
+        async function applyUploadedImage(event) {
+            console.log('🚀 applyUploadedImage called');
+            
+            if (!uploadedImageData || !originalImageFile) {
+                console.error('❌ No image data or file');
+                return;
+            }
             
             // Show loading state
-            const applyBtn = event.target;
+            const applyBtn = event.currentTarget;
             const originalText = applyBtn.innerHTML;
             applyBtn.disabled = true;
             applyBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> 処理中...';
             
+            console.log('📤 Sending to API:', BACKGROUND_REMOVAL_API);
+            
             try {
                 // Call background removal API
                 const processedImage = await removeBackground(originalImageFile);
+                
+                console.log('✅ API returned successfully');
                 
                 // Apply to main image
                 const mainImage = document.getElementById('backgroundRemovalImage');
@@ -1990,8 +1999,8 @@
                 showNotification('白抜き処理が完了しました！', 'success');
                 
             } catch (error) {
-                console.error('Background removal error:', error);
-                showNotification('エラーが発生しました。もう一度お試しください。', 'error');
+                console.error('❌ Background removal error:', error);
+                showNotification(`エラー: ${error.message}`, 'error');
                 
                 // Restore button state
                 applyBtn.disabled = false;
@@ -2016,18 +2025,25 @@
                     try {
                         // Data URLをBlobに変換
                         const dataUrl = e.target.result;
+                        console.log('📷 Image converted to Data URL, length:', dataUrl.length);
                         
                         // FormDataでimageUrlとして送信
                         const formData = new FormData();
                         formData.append('imageUrl', dataUrl);
+                        
+                        console.log('🌐 Fetching:', BACKGROUND_REMOVAL_API);
                         
                         const response = await fetch(BACKGROUND_REMOVAL_API, {
                             method: 'POST',
                             body: formData,
                         });
                         
+                        console.log('📨 Response status:', response.status);
+                        console.log('📨 Response headers:', response.headers.get('content-type'));
+                        
                         if (!response.ok) {
                             const errorData = await response.json();
+                            console.error('❌ API Error:', errorData);
                             throw new Error(errorData.error || `API error: ${response.status}`);
                         }
                         

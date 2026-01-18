@@ -901,8 +901,8 @@
                             <div class="relative">
                                 <input type="file" id="imageUploadInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
                                 <label for="imageUploadInput" class="flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold rounded-xl cursor-pointer hover:from-blue-700 hover:to-blue-600 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                                    <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
-                                    <span>画像をアップロード</span>
+                                    <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                                    <span>白抜きをする</span>
                                 </label>
                             </div>
                             
@@ -1915,6 +1915,10 @@
         
         // --- Image Upload Functionality ---
         let uploadedImageData = null;
+        let originalImageFile = null;
+        
+        // Cloudflare API Configuration
+        const BACKGROUND_REMOVAL_API = 'YOUR_CLOUDFLARE_API_ENDPOINT'; // ここにCloudflareのAPIエンドポイントを設定
         
         function handleImageUpload(event) {
             const file = event.target.files[0];
@@ -1932,6 +1936,9 @@
                 alert('ファイルサイズは10MB以下にしてください。');
                 return;
             }
+            
+            // Store original file for API call
+            originalImageFile = file;
             
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -1952,25 +1959,68 @@
             reader.readAsDataURL(file);
         }
         
-        function applyUploadedImage() {
-            if (!uploadedImageData) return;
+        async function applyUploadedImage() {
+            if (!uploadedImageData || !originalImageFile) return;
             
-            // Apply to main image
-            const mainImage = document.getElementById('backgroundRemovalImage');
-            mainImage.src = uploadedImageData;
+            // Show loading state
+            const applyBtn = event.target;
+            const originalText = applyBtn.innerHTML;
+            applyBtn.disabled = true;
+            applyBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> 処理中...';
             
-            // Add scale animation
-            mainImage.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                mainImage.style.transform = 'scale(1)';
-            }, 100);
-            mainImage.style.transition = 'transform 0.3s ease-out';
+            try {
+                // Call background removal API
+                const processedImage = await removeBackground(originalImageFile);
+                
+                // Apply to main image
+                const mainImage = document.getElementById('backgroundRemovalImage');
+                mainImage.src = processedImage;
+                
+                // Add scale animation
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.style.transform = 'scale(1)';
+                }, 100);
+                mainImage.style.transition = 'transform 0.3s ease-out';
+                
+                // Clear upload
+                clearImageUpload();
+                
+                // Show success message
+                showNotification('白抜き処理が完了しました！', 'success');
+                
+            } catch (error) {
+                console.error('Background removal error:', error);
+                showNotification('エラーが発生しました。もう一度お試しください。', 'error');
+                
+                // Restore button state
+                applyBtn.disabled = false;
+                applyBtn.innerHTML = originalText;
+            }
+        }
+        
+        async function removeBackground(file) {
+            // Create FormData for file upload
+            const formData = new FormData();
+            formData.append('image', file);
             
-            // Clear upload
-            clearImageUpload();
+            // Call Cloudflare API
+            const response = await fetch(BACKGROUND_REMOVAL_API, {
+                method: 'POST',
+                body: formData,
+                // Add any required headers
+                // headers: {
+                //     'Authorization': 'Bearer YOUR_API_KEY',
+                // }
+            });
             
-            // Show success message
-            showNotification('画像を適用しました！', 'success');
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+            
+            // Get the processed image
+            const blob = await response.blob();
+            return URL.createObjectURL(blob);
         }
         
         function clearImageUpload() {
@@ -1987,12 +2037,13 @@
         function showNotification(message, type = 'info') {
             // Create notification element
             const notification = document.createElement('div');
-            notification.className = `fixed top-20 right-6 z-50 px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 ${
-                type === 'success' ? 'bg-green-500' : 'bg-blue-500'
-            } text-white font-medium`;
+            const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+            
+            notification.className = `fixed top-20 right-6 z-50 px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 ${bgColor} text-white font-medium`;
             notification.innerHTML = `
                 <div class="flex items-center gap-3">
-                    <i class="fa-solid ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} text-xl"></i>
+                    <i class="fa-solid ${icon} text-xl"></i>
                     <span>${message}</span>
                 </div>
             `;

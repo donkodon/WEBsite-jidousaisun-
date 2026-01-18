@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ListingPro AI - EC出品自動化ソリューション</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb', // vivid blue
+                        secondary: '#1e3a8a', // dark blue
+                        accent: '#ff8c00', // orange for badges
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles if needed */
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #60a5fa, #a855f7);
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* Fixed header */
+        header.fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Floating banner */
+        .floating-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            animation: slideInFromRight 0.6s ease-out;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        @keyframes slideInFromRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .floating-banner:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .floating-banner .close-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: #ef4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+        
+        .floating-banner .close-btn:hover {
+            background: #dc2626;
+            transform: scale(1.1);
+        }
+        
+        .floating-banner.hidden {
+            animation: slideOutToRight 0.4s ease-in forwards;
+        }
+        
+        @keyframes slideOutToRight {
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-banner {
+                bottom: 15px;
+                right: 15px;
+                max-width: calc(100vw - 30px);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+
+    <!-- Header -->
+    <header id="main-header" class="absolute top-0 w-full z-50 text-white">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-blue-600 w-8 h-8 rounded flex items-center justify-center text-lg font-bold">L</div>
+                <span class="text-xl font-bold">ListingPro AI</span>
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#features" class="hover:text-blue-300 transition">機能</a>
+                <a href="#pricing" class="hover:text-blue-300 transition">料金</a>
+                <a href="#" class="hover:text-blue-300 transition">事例</a>
+                <a href="#faq" class="hover:text-blue-300 transition">よくある質問</a>
+            </nav>
+            <a href="contact.html" class="bg-white text-blue-900 px-5 py-2 rounded font-bold text-sm hover:bg-gray-100 transition">
+                お問い合わせ
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen min-h-[600px] flex items-center justify-center text-white relative">
+        <div class="container mx-auto px-6 text-center pt-20 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                出品作業は、<br>
+                <span class="text-blue-400">AIに丸投げ</span>する時代へ。
+            </h1>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-300">
+                白抜き加工、自動採寸、AIライティング。<br>
+                ListingPro AIなら、従来の1/10のコストで、高品質なささげ業務を全自動化します。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
+                    無料でデモを試す <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="contact.html" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white border border-white/50 px-8 py-4 rounded-lg font-bold text-lg transition">
+                    資料ダウンロード
+                </a>
+            </div>
+            <div class="flex justify-center gap-8 text-sm font-medium text-gray-400">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-check text-blue-400"></i> 導入実績 500社以上
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-check text-blue-400"></i> 月額費用 業界最安水準
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="py-16 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden border-b border-gray-100">
+        <!-- Background Decoration -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-purple-50 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-800 tracking-wide">
+                バックオフィス業務を効率化し、<br class="md:hidden">事業成長を加速
+            </h2>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-2 lg:gap-8 max-w-5xl mx-auto mt-10">
+                
+                <!-- Achievement 1 -->
+                <div class="flex items-center justify-center relative px-1 w-full md:w-auto">
+                    <!-- Left Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -mr-6 md:-mr-8 z-0">
+                         <img src="https://www.genspark.ai/api/files/s/EXNJdwhy" alt="Laurel Wreath Left" class="w-full h-full object-contain opacity-90" style="transform: scale(1.1, 1.3);">
+                    </div>
+                    
+                    <!-- Center Content -->
+                    <div class="flex flex-col items-center mx-1 z-10 flex-shrink-0 min-w-[100px] py-2 relative top-1">
+                        <p class="text-sm md:text-sm lg:text-base font-bold text-gray-700 mb-1 lg:mb-2 tracking-widest text-center whitespace-nowrap">利用継続率</p>
+                        <div class="flex items-baseline -mt-2 lg:-mt-3">
+                            <span class="text-4xl md:text-5xl lg:text-7xl font-bold text-blue-700 font-sans tracking-tight drop-shadow-sm">99</span>
+                            <span class="text-xl md:text-2xl lg:text-3xl font-bold text-blue-600 ml-1">%</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -ml-6 md:-ml-8 z-0">
+                         <img src="https://www.genspark.ai/api/files/s/EXNJdwhy" alt="Laurel Wreath Right" class="w-full h-full object-contain opacity-90" style="transform: scaleX(-1) scale(1.1, 1.3);">
+                    </div>
+                </div>
+
+                <!-- Divider for Mobile -->
+                <div class="w-16 h-px bg-gray-200 md:hidden"></div>
+                <!-- Divider for Desktop -->
+                <div class="hidden md:block w-px h-16 lg:h-24 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+
+                <!-- Achievement 2 -->
+                <div class="flex items-center justify-center relative px-1 w-full md:w-auto">
+                    <!-- Left Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -mr-6 md:-mr-8 z-0">
+                         <img src="https://www.genspark.ai/api/files/s/EXNJdwhy" alt="Laurel Wreath Left" class="w-full h-full object-contain opacity-90" style="transform: scale(1.1, 1.3);">
+                    </div>
+                    
+                    <!-- Center Content -->
+                    <div class="flex flex-col items-center mx-1 z-10 flex-shrink-0 min-w-[120px] py-2 relative top-1">
+                        <p class="text-sm md:text-sm lg:text-base font-bold text-gray-700 mb-1 lg:mb-2 tracking-widest text-center whitespace-nowrap">販売・請求にかかる<br>業務量</p>
+                        <div class="flex flex-col items-center -mt-2 lg:-mt-3">
+                            <div class="flex items-baseline">
+                                <span class="text-4xl md:text-5xl lg:text-7xl font-bold text-blue-700 font-sans tracking-tight drop-shadow-sm">90</span>
+                                <span class="text-xl md:text-2xl lg:text-3xl font-bold text-blue-600 ml-1">%</span>
+                            </div>
+                            <span class="text-[10px] md:text-xs lg:text-sm font-bold text-blue-600 -mt-1 lg:-mt-2 tracking-wider bg-blue-50 px-2 py-0.5 rounded-full">削減</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -ml-6 md:-ml-8 z-0">
+                         <img src="https://www.genspark.ai/api/files/s/EXNJdwhy" alt="Laurel Wreath Right" class="w-full h-full object-contain opacity-90" style="transform: scaleX(-1) scale(1.1, 1.3);">
+                    </div>
+                </div>
+
+                <!-- Divider for Mobile -->
+                <div class="w-16 h-px bg-gray-200 md:hidden"></div>
+                <!-- Divider for Desktop -->
+                <div class="hidden md:block w-px h-16 lg:h-24 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+
+                <!-- Achievement 3 -->
+                <div class="flex items-center justify-center relative px-1 w-full md:w-auto">
+                    <!-- Left Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -mr-6 md:-mr-8 z-0">
+                         <img src="https://www.genspark.ai/api/files/s/EXNJdwhy" alt="Laurel Wreath Left" class="w-full h-full object-contain opacity-90" style="transform: scale(1.1, 1.3);">
+                    </div>
+                    
+                    <!-- Center Content -->
+                    <div class="flex flex-col items-center mx-1 z-10 flex-shrink-0 min-w-[120px] py-2 relative top-1">
+                        <p class="text-sm md:text-sm lg:text-base font-bold text-gray-700 mb-1 lg:mb-2 tracking-widest text-center whitespace-nowrap">
+                            契約企業の売上<br><span class="text-[10px] lg:text-xs font-normal text-gray-500">(前年比)</span>
+                        </p>
+                        <div class="flex flex-col items-center -mt-2 lg:-mt-3">
+                            <div class="flex items-baseline">
+                                <span class="text-4xl md:text-5xl lg:text-7xl font-bold text-blue-700 font-sans tracking-tight drop-shadow-sm">650</span>
+                                <span class="text-xl md:text-2xl lg:text-3xl font-bold text-blue-600 ml-1">%</span>
+                            </div>
+                            <span class="text-[10px] md:text-xs lg:text-sm font-bold text-blue-600 -mt-1 lg:-mt-2 tracking-wider bg-blue-50 px-2 py-0.5 rounded-full">成長</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -ml-6 md:-ml-8 z-0">
+                         <img src="https://www.genspark.ai/api/files/s/EXNJdwhy" alt="Laurel Wreath Right" class="w-full h-full object-contain opacity-90" style="transform: scaleX(-1) scale(1.1, 1.3);">
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="text-center md:text-right text-[10px] text-gray-400 mt-10 max-w-6xl mx-auto">
+                ※自社調べ（2025年7月） / 導入効果には個人差があります
+            </p>
+        </div>
+        
+        <style>
+            @keyframes blob {
+                0% { transform: translate(0px, 0px) scale(1); }
+                33% { transform: translate(30px, -50px) scale(1.1); }
+                66% { transform: translate(-20px, 20px) scale(0.9); }
+                100% { transform: translate(0px, 0px) scale(1); }
+            }
+            .animate-blob {
+                animation: blob 7s infinite;
+            }
+            .animation-delay-2000 {
+                animation-delay: 2s;
+            }
+        </style>
+    </section>
+
+    <!-- Unified Management Section -->
+    <section class="py-24 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6">
+            <!-- Section Title -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                    ListingPro AIはEC事業者の<br class="md:hidden">ささげ業務から出品までを<br>
+                    AIを補助的ツールを使い、<br class="md:hidden">一元管理することのできるサービスです。
+                </h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+                    商品撮影から画像加工、データ入力、各モールへの出品まで、煩雑な業務フローを一つのプラットフォームで完結。<br>
+                    業務の分断を解消し、EC運営の効率を劇的に向上させます。
+                </p>
+            </div>
+
+            <!-- Workflow Diagram -->
+            <div class="max-w-6xl mx-auto">
+                <div class="relative">
+                    <!-- Desktop View: Flow Diagram -->
+                    <div class="hidden md:flex items-center justify-between gap-8">
+                        
+                        <!-- Step 1: Contract Management -->
+                        <div class="flex-1 relative">
+                            <div class="bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 shadow-lg border-2 border-blue-100 hover:shadow-xl transition duration-300">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="bg-blue-600 text-white px-4 py-2 rounded-full font-bold text-sm">
+                                        採寸撮影業務
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mt-6">
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-mobile-screen-button text-blue-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">モバイルアプリ管理</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-ruler text-blue-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">自動採寸</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-lightbulb text-blue-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">自動候補</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-chart-line text-blue-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">ダッシュボード</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Arrow -->
+                            <div class="absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+                                <div class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-arrow-right text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Billing & Payment -->
+                        <div class="flex-1 relative">
+                            <div class="bg-gradient-to-br from-indigo-50 to-white rounded-3xl p-8 shadow-lg border-2 border-indigo-100 hover:shadow-xl transition duration-300">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="bg-indigo-600 text-white px-4 py-2 rounded-full font-bold text-sm">
+                                        原稿業務
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mt-6">
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-scissors text-indigo-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">自動白抜き</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-tag text-indigo-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">自動リネーム</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-wand-magic-sparkles text-indigo-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">画像編集</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-expand text-indigo-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">リサイズ</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Arrow -->
+                            <div class="absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+                                <div class="bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-arrow-right text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Sales Management -->
+                        <div class="flex-1 relative">
+                            <div class="bg-gradient-to-br from-purple-50 to-white rounded-3xl p-8 shadow-lg border-2 border-purple-100 hover:shadow-xl transition duration-300">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div class="bg-purple-600 text-white px-4 py-2 rounded-full font-bold text-sm">
+                                        管理業務
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mt-6">
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-folder-open text-purple-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">データ管理</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-calendar-check text-purple-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">進捗管理</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-chart-pie text-purple-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">データ分析</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2 p-4 bg-white rounded-xl shadow-sm">
+                                        <i class="fa-solid fa-laptop text-purple-600 text-3xl"></i>
+                                        <span class="text-xs text-gray-600 font-medium text-center">レポート</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Mobile View: Vertical Stack -->
+                    <div class="md:hidden space-y-6">
+                        
+                        <!-- Step 1: Contract Management -->
+                        <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 shadow-lg border-2 border-blue-100">
+                            <div class="bg-blue-600 text-white px-4 py-2 rounded-full font-bold text-sm inline-block mb-4">
+                                採寸撮影業務
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-mobile-screen-button text-blue-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">モバイルアプリ管理</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-ruler text-blue-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">自動採寸</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-lightbulb text-blue-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">自動候補</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-chart-line text-blue-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">ダッシュボード</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <div class="flex justify-center">
+                            <div class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-arrow-down text-lg"></i>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Billing & Payment -->
+                        <div class="bg-gradient-to-br from-indigo-50 to-white rounded-2xl p-6 shadow-lg border-2 border-indigo-100">
+                            <div class="bg-indigo-600 text-white px-4 py-2 rounded-full font-bold text-sm inline-block mb-4">
+                                原稿業務
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-scissors text-indigo-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">自動白抜き</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-tag text-indigo-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">自動リネーム</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-indigo-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">画像編集</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-expand text-indigo-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">リサイズ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Down -->
+                        <div class="flex justify-center">
+                            <div class="bg-indigo-600 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-arrow-down text-lg"></i>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Sales Management -->
+                        <div class="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 shadow-lg border-2 border-purple-100">
+                            <div class="bg-purple-600 text-white px-4 py-2 rounded-full font-bold text-sm inline-block mb-4">
+                                管理業務
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-folder-open text-purple-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">データ管理</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-calendar-check text-purple-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">進捗管理</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-chart-pie text-purple-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">データ分析</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 p-3 bg-white rounded-lg shadow-sm">
+                                    <i class="fa-solid fa-laptop text-purple-600 text-2xl"></i>
+                                    <span class="text-xs text-gray-600 font-medium">レポート</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits by Role Section -->
+    <section class="py-24 bg-gradient-to-b from-blue-50 via-blue-50/50 to-white">
+        <div class="container mx-auto px-6">
+            <!-- Section Title -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">
+                    すべての担当者に、<br class="md:hidden">最適なメリットを
+                </h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+                    ListingPro AIは、役割ごとに異なる課題を解決し、チーム全体の生産性を最大化します。
+                </p>
+            </div>
+
+            <!-- Role Cards Grid -->
+            <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+                
+                <!-- Card 1: ささげ担当者 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+                    <!-- Illustration Placeholder -->
+                    <div class="flex justify-center mb-6">
+                        <div class="w-32 h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-camera text-blue-600 text-5xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Title with Check -->
+                    <div class="flex items-center justify-center gap-2 mb-6">
+                        <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-white text-xs"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">ささげ担当者</h3>
+                    </div>
+                    
+                    <!-- Benefits List -->
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>白抜き作業がラクになる</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>採寸、寸法状況、見積回答ができる</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-blue-600 mt-1">•</span>
+                            <span>進捗がスムーズになり業務に集中できる</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: 経理担当者 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+                    <!-- Illustration Placeholder -->
+                    <div class="flex justify-center mb-6">
+                        <div class="w-32 h-32 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-calculator text-indigo-600 text-5xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Title with Check -->
+                    <div class="flex items-center justify-center gap-2 mb-6">
+                        <div class="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-white text-xs"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">経理担当者</h3>
+                    </div>
+                    
+                    <!-- Benefits List -->
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-indigo-600 mt-1">•</span>
+                            <span>モバイルアプリで現場管理が簡単になる</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-indigo-600 mt-1">•</span>
+                            <span>自動採寸でミスなく効率的に測定できる</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-indigo-600 mt-1">•</span>
+                            <span>ダッシュボードで進捗を一目で確認できる</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: 事業責任者 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+                    <!-- Illustration Placeholder -->
+                    <div class="flex justify-center mb-6">
+                        <div class="w-32 h-32 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-user-tie text-purple-600 text-5xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Title with Check -->
+                    <div class="flex items-center justify-center gap-2 mb-6">
+                        <div class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-white text-xs"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">事業責任者</h3>
+                    </div>
+                    
+                    <!-- Benefits List -->
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-purple-600 mt-1">•</span>
+                            <span>見落ー売上の収益管理を一気通貫でできる</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-purple-600 mt-1">•</span>
+                            <span>経営改善など収益指標が全数化できる</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm">
+                            <span class="text-purple-600 mt-1">•</span>
+                            <span>収支指標を正確に把握できる</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Features Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <!-- Section Title -->
+            <div class="text-center mb-12">
+                <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">SERVICE FEATURES</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">
+                    サービスの特徴
+                </h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
+                    EC出品に必要なすべての機能を一つのプラットフォームで提供します。
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Feature 1: モバイルアプリ -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-mobile-screen-button text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-blue-600 transition duration-300">モバイルアプリ</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-blue-600 group-hover:translate-x-1 transition duration-300"></i>
+                </div>
+
+                <!-- Feature 2: ダッシュボード -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-chart-line text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-indigo-600 transition duration-300">ダッシュボード</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-indigo-600 group-hover:translate-x-1 transition duration-300"></i>
+                </div>
+
+                <!-- Feature 3: リネーム -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-pen-to-square text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-purple-600 transition duration-300">リネーム</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-purple-600 group-hover:translate-x-1 transition duration-300"></i>
+                </div>
+
+                <!-- Feature 4: 画像編集 -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-pink-50 rounded-lg flex items-center justify-center text-pink-600 group-hover:bg-pink-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-pink-600 transition duration-300">画像編集</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-pink-600 group-hover:translate-x-1 transition duration-300"></i>
+                </div>
+
+                <!-- Feature 5: 白抜き -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-scissors text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-teal-600 transition duration-300">白抜き</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-teal-600 group-hover:translate-x-1 transition duration-300"></i>
+                </div>
+
+                <!-- Feature 6: 自動採寸 -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-cyan-50 rounded-lg flex items-center justify-center text-cyan-600 group-hover:bg-cyan-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-ruler-combined text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-cyan-600 transition duration-300">自動採寸</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-cyan-600 group-hover:translate-x-1 transition duration-300"></i>
+                </div>
+
+                <!-- Feature 7: カスタマイズ -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-sliders text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-orange-600 transition duration-300">カスタマイズ</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-orange-600 group-hover:translate-x-1 transition duration-300"></i>
+                </div>
+
+                <!-- Feature 8: 自動データ入力 -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group relative overflow-hidden">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-keyboard text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-emerald-600 transition duration-300">自動データ入力</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-emerald-600 group-hover:translate-x-1 transition duration-300"></i>
+                    
+                    <!-- Badge -->
+                    <div class="absolute -top-1 -right-8 bg-yellow-400 text-yellow-900 text-[10px] font-bold py-1 w-24 text-center rotate-45 shadow-sm">
+                        準備中
+                    </div>
+                </div>
+
+                <!-- Feature 9: 着用画像生成 -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group relative overflow-hidden">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-rose-50 rounded-lg flex items-center justify-center text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-shirt text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-rose-600 transition duration-300">着用画像生成</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-rose-600 group-hover:translate-x-1 transition duration-300"></i>
+                    
+                    <!-- Badge -->
+                    <div class="absolute -top-1 -right-8 bg-yellow-400 text-yellow-900 text-[10px] font-bold py-1 w-24 text-center rotate-45 shadow-sm">
+                        準備中
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Additional Info -->
+            <div class="text-center mt-12">
+                <p class="text-gray-500 text-sm">
+                    すべての機能が1つのプラットフォームで利用可能。<br class="md:hidden">
+                    必要な機能だけを選んでカスタマイズできます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Download Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 relative overflow-hidden">
+        <!-- Background Decoration -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-blob"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Title & Description -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    資料ダウンロード
+                </h2>
+                <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                    資料請求、業種別事例やデモのご案内、お見積りなど、<br class="hidden md:block">
+                    お気軽にご相談ください。
+                </p>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 max-w-3xl mx-auto">
+                <!-- Contact Button (Outlined) -->
+                <a href="contact.html" class="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 rounded-full border-2 border-white text-white font-bold text-base md:text-lg hover:bg-white hover:text-blue-600 transition duration-300 flex items-center justify-center gap-2 group">
+                    お問い合わせ
+                    <i class="fa-solid fa-chevron-right text-sm group-hover:translate-x-1 transition duration-300"></i>
+                </a>
+
+                <!-- Download Button (Filled) -->
+                <a href="contact.html" class="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 rounded-full bg-white text-blue-600 font-bold text-base md:text-lg hover:bg-blue-50 hover:shadow-2xl transition duration-300 flex items-center justify-center gap-3 group">
+                    資料ダウンロード
+                    <i class="fa-solid fa-download text-sm group-hover:translate-y-1 transition duration-300"></i>
+                </a>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="text-center mt-8">
+                <p class="text-white/70 text-sm">
+                    <i class="fa-solid fa-lock mr-1"></i>
+                    お客様の情報は厳重に管理され、第三者に開示されることはありません
+                </p>
+            </div>
+        </div>
+
+        <style>
+            @keyframes blob {
+                0% { transform: translate(0px, 0px) scale(1); }
+                33% { transform: translate(30px, -50px) scale(1.1); }
+                66% { transform: translate(-20px, 20px) scale(0.9); }
+                100% { transform: translate(0px, 0px) scale(1); }
+            }
+            .animate-blob {
+                animation: blob 7s infinite;
+            }
+            .animation-delay-2000 {
+                animation-delay: 2s;
+            }
+        </style>
+    </section>
+
+    <!-- Detailed Features Section -->
+    <div id="features" class="bg-white overflow-hidden">
+        
+        <!-- Feature 1: Background Removal -->
+        <section class="py-20 border-b border-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <div class="md:w-1/2 order-2 md:order-1">
+                        <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">ONE-CLICK BACKGROUND REMOVAL</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                            プロ級の白抜き画像を、<br>瞬時に。
+                        </h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            高度なAIアルゴリズムが、複雑な境界線や半透明な素材も正確に認識。髪の毛のディテールや商品の影を自然に残したまま、ECサイトに最適な白背景画像を作成します。
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">髪の毛やファー素材などの複雑な境界線も高精度に切り抜き</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">自然な影（ドロップシャドウ）を保持・生成し、立体感を損なわない</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">大量の画像も一括アップロードで処理可能</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 order-1 md:order-2">
+                        <div class="rounded-2xl shadow-2xl overflow-hidden bg-white border border-gray-200 p-4">
+                            <img src="images/feature_background_removal_v2.png" alt="白抜き機能" class="w-full h-auto rounded-xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 2: Auto Measurement -->
+        <section class="py-20 border-b border-gray-100 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <div class="md:w-1/2">
+                        <!-- Updated container for vertical mobile image -->
+                        <div class="flex justify-center">
+                            <div class="relative w-full max-w-sm mx-auto">
+                                <img src="images/feature_auto_measure_mobile.png" alt="自動採寸機能スマホアプリ画面" class="w-full h-auto drop-shadow-2xl hover:scale-105 transition duration-500">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">AI AUTO MEASUREMENT</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                            採寸作業は、もう不要です。
+                        </h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            商品の写真を撮るだけで、AIが自動的にサイズ（幅・高さ・奥行き）を計測します。手作業による計測ミスを防ぎ、サイズ記載漏れによる返品リスクを大幅に低減します。
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">画像内の基準マーカーまたは商品自体からサイズを自動算出</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">計測結果はCSVで即座に出力、商品管理システムへ連携可能</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">サイズガイド画像の自動生成機能も搭載</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 3: Bulk Resize -->
+        <section class="py-20 border-b border-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <div class="md:w-1/2 order-2 md:order-1">
+                        <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">BULK RESIZE & PROCESSING</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                            貴社専用の出品ルールを<br>プリセット設定
+                        </h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            事前に設定したルールに従い、画像を自動で加工。Amazonや楽天、Shopifyなど、各モールの推奨サイズ（例えばAmazonなら1000px以上・白背景、楽天なら正方形など）へのリサイズはもちろん、余白の調整やロゴの挿入も自動化します。
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">Amazon, 楽天市場, Yahoo!, Shopifyなど主要モールの推奨ルールを完備</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">被写体を中央に配置し、適切な余白（パディング）を自動で設定</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">透かし（ウォーターマーク）やブランドロゴの自動合成も対応</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 order-1 md:order-2">
+                        <div class="rounded-2xl shadow-2xl overflow-hidden bg-white border border-gray-200 p-4">
+                            <img src="images/feature_bulk_resize_preset.png" alt="一括加工機能" class="w-full h-auto rounded-xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 4: Smart Rename -->
+        <section class="py-20 border-b border-gray-100 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <div class="md:w-1/2">
+                        <div class="rounded-2xl shadow-2xl overflow-hidden bg-gray-800 border border-gray-700">
+                            <!-- Browser Chrome -->
+                            <div class="bg-gray-700 px-4 py-2 flex items-center gap-2">
+                                <div class="flex gap-1.5">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="flex-1 text-center text-xs text-gray-400">ファイル管理 - ListingPro AI</div>
+                            </div>
+                            
+                            <!-- Content Area -->
+                            <div class="bg-white p-6">
+                                <!-- Before Section -->
+                                <div class="mb-6">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <div class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold">変更前</div>
+                                    </div>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex items-center gap-2 text-gray-400 font-mono">
+                                            <i class="fa-regular fa-file-image text-gray-400"></i>
+                                            <span class="line-through">DSC_0001.jpg</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-gray-400 font-mono">
+                                            <i class="fa-regular fa-file-image text-gray-400"></i>
+                                            <span class="line-through">DSC_0002.jpg</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-gray-400 font-mono">
+                                            <i class="fa-regular fa-file-image text-gray-400"></i>
+                                            <span class="line-through">IMG_2341.jpg</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Arrow -->
+                                <div class="flex justify-center mb-6">
+                                    <div class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                        AI自動リネーム
+                                        <i class="fa-solid fa-arrow-down"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- After Section -->
+                                <div>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <div class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-bold">変更後</div>
+                                    </div>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex items-center gap-2 text-gray-700 font-mono">
+                                            <i class="fa-regular fa-file-image text-blue-600"></i>
+                                            <span class="font-semibold">SKU-12345_RED_L.jpg</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-gray-700 font-mono">
+                                            <i class="fa-regular fa-file-image text-blue-600"></i>
+                                            <span class="font-semibold">SKU-12345_BLUE_M.jpg</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-gray-700 font-mono">
+                                            <i class="fa-regular fa-file-image text-blue-600"></i>
+                                            <span class="font-semibold">SKU-67890_BLACK_S.jpg</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">SMART RENAMING</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                            スマートリネーム機能
+                        </h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            デジカメで撮影した意味のないファイル名（DSC_001.jpgなど）を、商品情報（品番、カラー、サイズなど）に基づいて、管理しやすい名前に自動変換します。CSV連携で大量のファイルも一括処理可能です。
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">品番、カテゴリ、カラー、サイズなどを自由に組み合わせた命名ルール設定</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">CSVファイルとのマッチングによる完全自動リネーム</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">フォルダ振り分け機能も搭載</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 5: Image Processing -->
+        <section class="py-20 border-b border-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <div class="md:w-1/2 order-2 md:order-1">
+                        <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">ADVANCED IMAGE PROCESSING</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                            プロ品質の画像編集を、<br>数秒で。
+                        </h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            リサイズ、ロゴ挿入、トリミング、回転など、商品画像に必要なあらゆる編集作業を自動化。各ECモールの規定に合わせた最適なフォーマットで、統一感のある商品画像を大量生成できます。
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">Amazon、楽天など各モール規定サイズへの自動リサイズ・最適化</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">ブランドロゴ・透かしの一括挿入で知的財産を保護</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">明るさ・コントラスト調整、トリミング、回転など基本編集を完全網羅</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">ロゴ自動合成</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 order-1 md:order-2">
+                        <div class="rounded-2xl shadow-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 p-8">
+                            <!-- Editor Interface -->
+                            <div class="bg-gray-900 rounded-t-xl">
+                                <!-- Toolbar -->
+                                <div class="flex items-center gap-2 px-4 py-3 bg-gray-800 border-b border-gray-700">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-sm"></i>
+                                    <i class="fa-solid fa-crop text-gray-500 text-sm"></i>
+                                    <i class="fa-solid fa-rotate text-gray-500 text-sm"></i>
+                                    <i class="fa-solid fa-paintbrush text-gray-500 text-sm"></i>
+                                    <div class="flex-1"></div>
+                                    <div class="text-xs text-gray-400">編集中...</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Canvas Area -->
+                            <div class="bg-white rounded-b-xl p-8 shadow-lg relative overflow-hidden" style="min-height: 400px;">
+                                <!-- Product Image with Grid Background -->
+                                <div class="relative w-full h-full rounded-lg border-2 border-gray-200 overflow-hidden group">
+                                    
+                                    <!-- Background Grid (Transparency) -->
+                                    <div class="absolute inset-0 z-0" style="background-image: repeating-linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0), repeating-linear-gradient(45deg, #f0f0f0 25%, #ffffff 25%, #ffffff 75%, #f0f0f0 75%, #f0f0f0); background-position: 0 0, 10px 10px; background-size: 20px 20px;"></div>
+
+                                    <!-- Main Product Image -->
+                                    <img src="https://www.genspark.ai/api/files/s/DpKpqHmV?cache_control=3600" alt="Leather Bag Editing" class="relative z-10 w-full h-full object-cover">
+                                    
+                                    <!-- Editing UI Overlay: Bounding Box -->
+                                    <div class="absolute inset-x-8 inset-y-12 border-2 border-blue-500 border-dashed z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                        <!-- Corner handles -->
+                                        <div class="absolute -top-1.5 -left-1.5 w-3 h-3 bg-blue-500 rounded-full border border-white"></div>
+                                        <div class="absolute -top-1.5 -right-1.5 w-3 h-3 bg-blue-500 rounded-full border border-white"></div>
+                                        <div class="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-blue-500 rounded-full border border-white"></div>
+                                        <div class="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-blue-500 rounded-full border border-white"></div>
+                                    </div>
+
+
+
+                                    <!-- Processing Indicator -->
+                                    <div class="absolute top-4 left-4 z-40">
+                                        <div class="bg-green-500/90 backdrop-blur text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-2 shadow-lg animate-pulse">
+                                            <div class="w-2 h-2 bg-white rounded-full"></div>
+                                            処理中
+                                        </div>
+                                    </div>
+
+
+                                    
+                                </div>
+                                
+                                <!-- Bottom Info Bar -->
+                                <div class="flex items-center justify-between mt-4 pt-2 border-t border-gray-100">
+                                    <div class="flex items-center gap-3 text-xs text-gray-500">
+                                        <span><i class="fa-regular fa-image mr-1"></i> bag_product_01.jpg</span>
+                                    </div>
+                                    <div class="text-xs text-gray-500">
+                                        <i class="fa-solid fa-expand text-blue-500 mr-1"></i>
+                                        1200×1200px
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature 6: Model Generation -->
+        <section class="py-24 border-b border-gray-100 bg-white">
+            <div class="container mx-auto px-6">
+                
+                <div class="max-w-6xl mx-auto">
+                    <!-- Main Visual Area -->
+                    <div class="bg-gray-50 rounded-3xl p-8 md:p-12 mb-16 border border-gray-100 shadow-sm">
+                        <div class="flex flex-col md:flex-row items-center gap-12">
+                            <!-- Image Side -->
+                            <div class="w-full md:w-1/2">
+                                <div class="relative rounded-xl overflow-hidden shadow-2xl ring-4 ring-white">
+                                    <img src="https://www.genspark.ai/api/files/s/QEXmZOg7" alt="AIモデル生成ビフォーアフター" class="w-full h-auto">
+                                    <!-- Optional: Label Overlay -->
+                                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg text-sm font-bold shadow-sm text-gray-800">
+                                        <i class="fa-solid fa-wand-magic-sparkles text-blue-600 mr-2"></i>生成イメージ
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Text/Value Prop Side -->
+                            <div class="w-full md:w-1/2">
+                                <!-- Header -->
+                                <div class="mb-8">
+                                    <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">AI MODEL GENERATION</span>
+                                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                                        商品のモデル着用画像を<br>AIで生成
+                                    </h2>
+                                </div>
+                                
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6">
+                                    <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">撮影コストをゼロに。</span><br>
+                                    売れるクリエイティブを量産。
+                                </h3>
+                                <div class="space-y-6">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+                                            <i class="fa-solid fa-shirt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">商品画像を用意するだけ</h4>
+                                            <p class="text-sm text-gray-600 mt-1">ハンガーに掛けた状態や平置きの写真があればOK。特別な撮影機材は不要です。</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+                                            <i class="fa-solid fa-bolt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">数秒で生成完了</h4>
+                                            <p class="text-sm text-gray-600 mt-1">AIが商品の特徴を理解し、自然な着用感を再現。待ち時間なくバリエーションを作成できます。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Description Text -->
+                    <div class="text-center mb-16">
+                        <p class="text-gray-600 leading-relaxed text-lg max-w-3xl mx-auto">
+                            商品を平置きで撮影するだけで、AIが架空のモデルが着用しているかのような画像を生成します。<br class="hidden md:block">
+                            モデルの撮影コストやスケジュール調整の手間を削減し、魅力的な着用イメージを作成できます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Cost Performance Section -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">
+                        圧倒的な<br>コストパフォーマンス
+                    </h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        最新のAI技術を活用することで、開発・運用コストを極限まで圧縮。<br>
+                        他社ツールと比較しても、圧倒的な低価格を実現しました。<br>
+                        浮いた予算を、広告や商品開発などの「攻め」の施策に投資できます。
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-900 mb-1">月額固定費なしプランも用意</h4>
+                                <p class="text-gray-500 text-sm">出品数に応じた従量課金で無駄を排除。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-900 mb-1">導入サポート無料</h4>
+                                <p class="text-gray-500 text-sm">初期設定やワークフロー構築を専任担当が支援。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <div class="bg-gray-50 rounded-2xl p-8 shadow-inner border border-gray-100">
+                        <h3 class="text-center font-bold text-gray-700 mb-6">コスト削減効果の比較イメージ</h3>
+                        <div class="h-[300px]">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs text-gray-400 mt-4">※当社調べ（1商品あたりの処理コスト比較）</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900">業界最安水準の料金プラン</h2>
+            <p class="text-gray-600">初期費用・導入費用は0円。必要なのは月額利用料だけ。<br>ビジネスの規模に合わせて最適なプランをお選びいただけます。</p>
+        </div>
+
+        <div class="container mx-auto px-6 max-w-7xl">
+            <!-- Tab Navigation -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-white rounded-lg shadow-md p-1 border border-gray-200">
+                    <button id="tab-annual" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition bg-blue-600 text-white">
+                        年間契約
+                    </button>
+                    <button id="tab-monthly" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition text-gray-600 hover:text-gray-900">
+                        月次契約
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-x-auto">
+                <!-- Annual Plan Table (年間キャンペーン) -->
+                <table id="annual-table" class="w-full text-base pricing-table">
+                    <thead>
+                        <tr class="bg-gray-100 border-b-2 border-gray-300">
+                            <th colspan="8" class="py-4 px-6 text-left font-bold text-gray-700 text-lg">年間キャンペーン</th>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="py-3 px-4 text-left font-bold text-gray-700 border-r border-gray-200"></th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">100</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">500</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">1000</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">2500</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">5000</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">10000</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700">20000</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">作業点数</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">100</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">500</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">1000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">2500</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">5000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">10000</td>
+                            <td class="py-3 px-4 text-center">20000</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">単価</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">0</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">50</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">40</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">35</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">30</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">25</td>
+                            <td class="py-3 px-4 text-center">要相談</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">ダッシュボード</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動画像処理</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動データ入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Monthly Plan Table (通常) -->
+                <table id="monthly-table" class="w-full text-base pricing-table hidden">
+                    <thead>
+                        <tr class="bg-gray-100 border-b-2 border-gray-300">
+                            <th colspan="8" class="py-4 px-6 text-left font-bold text-gray-700 text-lg">通常</th>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="py-3 px-4 text-left font-bold text-gray-700 border-r border-gray-200"></th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">100</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">500</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">1000</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">2500</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">5000</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">10000</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700">20000</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">作業点数</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">100</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">500</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">1000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">2500</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">5000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">10000</td>
+                            <td class="py-3 px-4 text-center">20000</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">単価</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">0</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">85</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">75</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">65</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">55</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">45</td>
+                            <td class="py-3 px-4 text-center">要相談</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">ダッシュボード</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動画像処理</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動データ入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg px-12 py-4 rounded-lg shadow-lg transition">
+                    無料プランで今すぐ始める <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-white border-t border-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">FAQ</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-gray-900">よくある質問</h2>
+                <p class="text-gray-600">サービス導入に関するご不明点は、こちらでご確認ください。</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-900">無料トライアル期間中に機能の制限はありますか？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 bg-white text-gray-600 border-t border-gray-200 leading-relaxed">
+                        いいえ、機能の制限はありません。すべての機能を備えた「プロフェッショナルプラン」を30日間完全無料でお試しいただけます。期間終了後に自動的に課金されることはありませんので、安心してお試しください。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-900">どのECモールに対応していますか？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 bg-white text-gray-600 border-t border-gray-200 leading-relaxed">
+                        Amazon、楽天市場、Yahoo!ショッピング、Shopify、BASE、STORESなど、主要なECプラットフォームの推奨画像サイズや形式に対応しています。独自のサイズ規定がある場合も、カスタム設定で対応可能です。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-900">画像のセキュリティは安全ですか？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 bg-white text-gray-600 border-t border-gray-200 leading-relaxed">
+                        はい、お客様のデータは銀行レベルの高度な暗号化技術（SSL/TLS）を用いて保護されています。アップロードされた画像は処理完了後、一定期間を経て自動的に削除され、AIの学習データとして無断で使用されることはありません。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-900">契約期間の縛りはありますか？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 bg-white text-gray-600 border-t border-gray-200 leading-relaxed">
+                        いいえ、契約期間の縛りはございません。月単位でのご契約となり、いつでも解約が可能です。解約金なども一切発生しません。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-900">導入時のサポートはありますか？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden p-6 bg-white text-gray-600 border-t border-gray-200 leading-relaxed">
+                        はい、ございます。マニュアルのご提供はもちろん、プロフェッショナルプラン以上ではチャットサポートをご利用いただけます。また、エンタープライズプランでは専任の担当者が導入から運用まで伴走支援いたします。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-gradient-to-br from-blue-600 to-indigo-700 py-24 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                EC出品の未来を、あなたの手に。
+            </h2>
+            <p class="text-lg md:text-xl text-blue-100 mb-10">
+                30日間の無料トライアルを実施中。<br>
+                まずは実際の機能をお試しください。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition">
+                    今すぐ無料で始める
+                </a>
+                <a href="#" class="bg-blue-800/50 hover:bg-blue-800 border border-blue-400 text-white px-8 py-4 rounded-lg font-bold text-lg transition">
+                    営業担当に相談する
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 py-16">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between gap-12">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="bg-blue-600 w-6 h-6 rounded flex items-center justify-center text-white text-xs font-bold">L</div>
+                        <span class="text-white text-xl font-bold">ListingPro AI</span>
+                    </div>
+                    <p class="text-sm text-gray-500 max-w-xs leading-relaxed">
+                        AI技術を活用した次世代のEC出品自動化ソリューション。<br>
+                        企業のDXを加速させ、EC運営の新しいスタンダードを創ります。
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-16">
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Product</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#features" class="hover:text-white transition">機能一覧</a></li>
+                            <li><a href="#pricing" class="hover:text-white transition">料金プラン</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Company</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="hover:text-white transition">運営会社</a></li>
+                            <li><a href="#" class="hover:text-white transition">ニュース</a></li>
+                            <li><a href="contact.html" class="hover:text-white transition">お問い合わせ</a></li>
+                            <li><a href="#" class="hover:text-white transition">プライバシーポリシー</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-16 pt-8 text-center text-xs text-gray-600">
+                &copy; 2025 ListingPro AI Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- Cost Performance Chart ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('costChart').getContext('2d');
+            
+            // Custom plugin to draw rounded corners for bar chart
+            // Note: Chart.js v3+ supports borderRadius natively, but let's keep it simple
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['従来の人力作業', '他社ツールA', '他社ツールB', 'ListingPro AI'],
+                    datasets: [{
+                        label: '1商品あたりの処理コスト',
+                        data: [1000, 700, 500, 100], // Relative values based on image
+                        backgroundColor: [
+                            '#94a3b8', // Gray
+                            '#64748b', // Darker Gray
+                            '#475569', // Darkest Gray
+                            '#2563eb'  // Blue (Highlight)
+                        ],
+                        borderRadius: 8,
+                        barThickness: 40,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    },
+                    scales: {
+                        y: {
+                            display: false,
+                            grid: { display: false }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 10, family: "'Noto Sans JP', sans-serif" } }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        });
+
+        // --- Pricing Tab Switcher ---
+        const tabAnnual = document.getElementById('tab-annual');
+        const tabMonthly = document.getElementById('tab-monthly');
+        const annualTable = document.getElementById('annual-table');
+        const monthlyTable = document.getElementById('monthly-table');
+        
+        tabAnnual.addEventListener('click', function() {
+            // Switch to annual
+            tabAnnual.classList.add('bg-blue-600', 'text-white');
+            tabAnnual.classList.remove('text-gray-600');
+            tabMonthly.classList.remove('bg-blue-600', 'text-white');
+            tabMonthly.classList.add('text-gray-600');
+            
+            annualTable.classList.remove('hidden');
+            monthlyTable.classList.add('hidden');
+        });
+        
+        tabMonthly.addEventListener('click', function() {
+            // Switch to monthly
+            tabMonthly.classList.add('bg-blue-600', 'text-white');
+            tabMonthly.classList.remove('text-gray-600');
+            tabAnnual.classList.remove('bg-blue-600', 'text-white');
+            tabAnnual.classList.add('text-gray-600');
+            
+            monthlyTable.classList.remove('hidden');
+            annualTable.classList.add('hidden');
+        });
+
+        // --- FAQ Accordion ---
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                
+                // Toggle current
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Optional: Close others
+                faqBtns.forEach(otherBtn => {
+                    if (otherBtn !== btn) {
+                        const otherContent = otherBtn.nextElementSibling;
+                        const otherIcon = otherBtn.querySelector('i');
+                        if (!otherContent.classList.contains('hidden')) {
+                            otherContent.classList.add('hidden');
+                            otherIcon.classList.remove('rotate-180');
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+    <!-- Floating Trial Banner -->
+    <div id="floatingBanner" class="floating-banner">
+        <div class="close-btn" onclick="closeBanner()">
+            <i class="fa-solid fa-xmark text-white text-sm"></i>
+        </div>
+        <a href="#" class="block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl overflow-hidden transition-all duration-300" style="width: 420px;">
+            <div class="px-6 py-6 flex items-center justify-between gap-4">
+                <div class="flex flex-col">
+                    <h3 class="text-3xl font-black leading-tight text-yellow-300 mb-1">
+                        3ヶ月
+                    </h3>
+                    <h3 class="text-2xl font-black leading-tight whitespace-nowrap">
+                        無料トライアル
+                    </h3>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-lg px-5 py-2 border border-white/30 whitespace-nowrap">
+                    <span class="text-white font-bold">詳細を見る</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Fixed header on scroll
+        let lastScrollTop = 0;
+        const header = document.getElementById('main-header');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                header.classList.add('fixed-header');
+                header.classList.remove('absolute');
+            } else {
+                header.classList.remove('fixed-header');
+                header.classList.add('absolute');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                
+                // Skip if it's just "#"
+                if (href === '#') return;
+                
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = 80; // ヘッダーの高さを考慮
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Close floating banner
+        function closeBanner() {
+            const banner = document.getElementById('floatingBanner');
+            banner.classList.add('hidden');
+            
+            // Remove from DOM after animation
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 400);
+            
+            // Save to localStorage
+            localStorage.setItem('bannerClosed', 'true');
+        }
+        
+        // Check if banner was closed before
+        window.addEventListener('DOMContentLoaded', function() {
+            const bannerClosed = localStorage.getItem('bannerClosed');
+            if (bannerClosed === 'true') {
+                document.getElementById('floatingBanner').style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>

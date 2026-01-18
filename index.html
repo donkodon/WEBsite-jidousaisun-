@@ -1918,7 +1918,8 @@
         let originalImageFile = null;
         
         // Cloudflare API Configuration
-        const BACKGROUND_REMOVAL_API = 'https://adcf37a9.smart-measure.pages.dev/api/remove-bg';
+        // 実際に動作しているHugging Face APIを使用
+        const BACKGROUND_REMOVAL_API = 'https://jinkedon-withoutbg-api.hf.space/api/remove-bg';
         
         function handleImageUpload(event) {
             const file = event.target.files[0];
@@ -2023,43 +2024,40 @@
             return new Promise((resolve, reject) => {
                 reader.onload = async (e) => {
                     try {
-                        // Data URLをBlobに変換
                         const dataUrl = e.target.result;
                         console.log('📷 Image converted to Data URL, length:', dataUrl.length);
                         
-                        // FormDataでimageUrlとして送信
-                        const formData = new FormData();
-                        formData.append('imageUrl', dataUrl);
-                        
                         console.log('🌐 Fetching:', BACKGROUND_REMOVAL_API);
                         
+                        // Hugging Face APIはJSONで送信
                         const response = await fetch(BACKGROUND_REMOVAL_API, {
                             method: 'POST',
-                            body: formData,
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                image: dataUrl
+                            }),
                         });
                         
                         console.log('📨 Response status:', response.status);
                         console.log('📨 Response headers:', response.headers.get('content-type'));
                         
                         if (!response.ok) {
-                            const errorData = await response.json();
+                            const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
                             console.error('❌ API Error:', errorData);
                             throw new Error(errorData.error || `API error: ${response.status}`);
                         }
                         
-                        // レスポンスがJSON形式かBlob形式か確認
-                        const contentType = response.headers.get('content-type');
-                        if (contentType && contentType.includes('application/json')) {
-                            const result = await response.json();
-                            if (result.success && result.imageUrl) {
-                                resolve(result.imageUrl);
-                            } else {
-                                throw new Error(result.error || 'Unknown error');
-                            }
+                        // Hugging Face APIはJSONで返す
+                        const result = await response.json();
+                        console.log('✅ API Response:', result);
+                        
+                        if (result.success && result.image) {
+                            // Data URLとして返ってくる
+                            resolve(result.image);
                         } else {
-                            // Blob形式の画像を返す
-                            const blob = await response.blob();
-                            resolve(URL.createObjectURL(blob));
+                            throw new Error(result.error || 'Background removal failed');
                         }
                     } catch (error) {
                         reject(error);

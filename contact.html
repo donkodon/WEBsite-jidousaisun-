@@ -333,7 +333,9 @@
                 };
                 
                 // Send to backend API
-                const response = await fetch('http://localhost:3001/send-email', {
+                const apiUrl = 'https://3001-ivxd530gheo8m0op6ai75-dfc00ec5.sandbox.novita.ai/send-email';
+                
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

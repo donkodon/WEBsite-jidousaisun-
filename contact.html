@@ -333,7 +333,8 @@
                 };
                 
                 // Send to backend API
-                const apiUrl = 'https://3001-ivxd530gheo8m0op6ai75-dfc00ec5.sandbox.novita.ai/send-email';
+                // 本番環境では同じディレクトリのPHPファイルを使用
+                const apiUrl = './send-email.php';
                 
                 const response = await fetch(apiUrl, {
                     method: 'POST',

@@ -1,9 +1,32 @@
 const http = require('http');
-const https = require('https');
-const url = require('url');
+const nodemailer = require('nodemailer');
 
 const PORT = 3001;
 const RECIPIENT_EMAIL = 'kenji.noto@relight-rl.com';
+
+// Xserver SMTP configuration
+const transporter = nodemailer.createTransport({
+    host: 'sv16714.xserver.jp',
+    port: 465,
+    secure: true, // SSL
+    auth: {
+        user: 'kenji.noto@relight-rl.com',
+        pass: 'kenji0614'
+    },
+    // Additional settings for better compatibility
+    tls: {
+        rejectUnauthorized: false
+    }
+});
+
+// Verify SMTP connection
+transporter.verify(function(error, success) {
+    if (error) {
+        console.log('❌ SMTP接続エラー:', error);
+    } else {
+        console.log('✅ SMTPサーバー接続成功');
+    }
+});
 
 // Simple email sending server
 const server = http.createServer((req, res) => {
@@ -25,7 +48,7 @@ const server = http.createServer((req, res) => {
             body += chunk.toString();
         });
         
-        req.on('end', () => {
+        req.on('end', async () => {
             try {
                 const formData = JSON.parse(body);
                 
@@ -60,20 +83,44 @@ ${new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
                 console.log('='.repeat(50));
                 console.log(emailContent);
                 console.log('='.repeat(50));
-                console.log(`\n✉️  送信先: ${RECIPIENT_EMAIL}\n`);
                 
-                // In production, use a service like SendGrid, AWS SES, or Nodemailer with SMTP
-                // For now, just log to console
-                
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ 
-                    success: true, 
-                    message: 'お問い合わせを受け付けました',
-                    recipient: RECIPIENT_EMAIL
-                }));
+                // Send actual email via Xserver SMTP
+                try {
+                    const info = await transporter.sendMail({
+                        from: `"Relight お問い合わせフォーム" <kenji.noto@relight-rl.com>`,
+                        to: RECIPIENT_EMAIL,
+                        subject: `【Relight】お問い合わせ: ${formData.inquiryType}`,
+                        text: emailContent,
+                        html: `<pre style="font-family: 'Noto Sans JP', sans-serif; white-space: pre-wrap;">${emailContent}</pre>`
+                    });
+                    
+                    console.log('✅ メール送信成功!');
+                    console.log('📧 送信先:', RECIPIENT_EMAIL);
+                    console.log('🆔 Message ID:', info.messageId);
+                    console.log('='.repeat(50));
+                    console.log('');
+                    
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ 
+                        success: true, 
+                        message: 'お問い合わせを受け付けました',
+                        recipient: RECIPIENT_EMAIL,
+                        messageId: info.messageId
+                    }));
+                    
+                } catch (emailError) {
+                    console.error('❌ メール送信エラー:', emailError);
+                    
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ 
+                        success: false, 
+                        error: 'メール送信に失敗しました',
+                        details: emailError.message
+                    }));
+                }
                 
             } catch (error) {
-                console.error('Error processing request:', error);
+                console.error('❌ リクエスト処理エラー:', error);
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Invalid request' }));
             }
@@ -85,6 +132,9 @@ ${new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}
 });
 
 server.listen(PORT, () => {
-    console.log(`\n🚀 Email server running on port ${PORT}`);
-    console.log(`📧 Recipient: ${RECIPIENT_EMAIL}\n`);
+    console.log('');
+    console.log('🚀 Email server running on port', PORT);
+    console.log('📧 Recipient:', RECIPIENT_EMAIL);
+    console.log('🌐 SMTP Server: sv16714.xserver.jp');
+    console.log('');
 });

@@ -44,7 +44,7 @@ foreach ($required as $field) {
 }
 
 // メール送信先
-$to = 'kenji.noto@relight-rl.com';
+$to = 'info@relight-rl.com';
 
 // メール件名（UTF-8で統一）
 $subject = mb_encode_mimeheader('Relight お問い合わせ: ' . $data['inquiryType'], 'UTF-8');
@@ -67,14 +67,14 @@ $message .= "【送信日時】\n";
 $message .= date('Y/m/d H:i:s');
 
 // メールヘッダー（UTF-8で統一）
-$headers = "From: Relight <kenji.noto@relight-rl.com>\r\n";
+$headers = "From: Relight <info@relight-rl.com>\r\n";
 $headers .= "Reply-To: " . $data['email'] . "\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $headers .= "Content-Transfer-Encoding: 8bit";
 
 // 1. 管理者へのメール送信（-fオプション付き）
-$result1 = mb_send_mail($to, $subject, $message, $headers, "-f kenji.noto@relight-rl.com");
+$result1 = mb_send_mail($to, $subject, $message, $headers, "-f info@relight-rl.com");
 
 // 2. お客様への確認メール
 // お客様向けメール件名（UTF-8で統一）
@@ -103,19 +103,19 @@ $customer_message .= "※このメールは自動送信されています。\n";
 $customer_message .= "このメールに返信いただいても対応できかねますので、ご了承ください。\n\n";
 $customer_message .= "─────────────────────────\n";
 $customer_message .= "Relight - EC出品自動化ソリューション\n";
-$customer_message .= "Email: kenji.noto@relight-rl.com\n";
+$customer_message .= "Email: info@relight-rl.com\n";
 $customer_message .= "Website: https://relight-rl.com\n";
 $customer_message .= "─────────────────────────";
 
 // お客様向けメールヘッダー（UTF-8で統一）
-$customer_headers = "From: Relight <kenji.noto@relight-rl.com>\r\n";
-$customer_headers .= "Reply-To: kenji.noto@relight-rl.com\r\n";
+$customer_headers = "From: Relight <info@relight-rl.com>\r\n";
+$customer_headers .= "Reply-To: info@relight-rl.com\r\n";
 $customer_headers .= "MIME-Version: 1.0\r\n";
 $customer_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $customer_headers .= "Content-Transfer-Encoding: 8bit";
 
 // 2. お客様へのメール送信（-fオプション付き）
-$result2 = mb_send_mail($data['email'], $customer_subject, $customer_message, $customer_headers, "-f kenji.noto@relight-rl.com");
+$result2 = mb_send_mail($data['email'], $customer_subject, $customer_message, $customer_headers, "-f info@relight-rl.com");
 
 // 両方のメール送信結果を確認
 if ($result1 && $result2) {

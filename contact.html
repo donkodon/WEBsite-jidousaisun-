@@ -333,8 +333,8 @@
                 };
                 
                 // Send to backend API
-                // 本番環境では絶対パスを使用
-                const apiUrl = '/send-email.php';
+                // 本番環境では完全なURLを使用
+                const apiUrl = 'https://relight-rl.com/send-email.php';
                 
                 const response = await fetch(apiUrl, {
                     method: 'POST',

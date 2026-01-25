@@ -1,7 +1,8 @@
 <?php
 // 文字エンコード設定（最初に設定）
-mb_language('Japanese');
+mb_language('ja');
 mb_internal_encoding('UTF-8');
+ini_set('default_charset', 'UTF-8');
 
 // CORS設定
 header('Access-Control-Allow-Origin: *');
@@ -45,8 +46,8 @@ foreach ($required as $field) {
 // メール送信先
 $to = 'kenji.noto@relight-rl.com';
 
-// メール件名（エンコード）
-$subject = mb_encode_mimeheader('[Relight]お問い合わせ: ' . $data['inquiryType'], 'UTF-8', 'B');
+// メール件名（シンプルなテキストに変更）
+$subject = 'Relight お問い合わせ: ' . $data['inquiryType'];
 
 // メール本文
 $message = "新しいお問い合わせがありました\n\n";
@@ -66,7 +67,7 @@ $message .= "【送信日時】\n";
 $message .= date('Y/m/d H:i:s');
 
 // メールヘッダー
-$headers = "From: " . mb_encode_mimeheader('Relight お問い合わせフォーム', 'UTF-8') . " <kenji.noto@relight-rl.com>\r\n";
+$headers = "From: Relight <kenji.noto@relight-rl.com>\r\n";
 $headers .= "Reply-To: " . $data['email'] . "\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $headers .= "Content-Transfer-Encoding: 8bit";
@@ -75,7 +76,7 @@ $headers .= "Content-Transfer-Encoding: 8bit";
 $result1 = mb_send_mail($to, $subject, $message, $headers);
 
 // 2. お客様への確認メール
-$customer_subject = mb_encode_mimeheader('[Relight]お問い合わせを受け付けました', 'UTF-8', 'B');
+$customer_subject = 'Relight お問い合わせを受け付けました';
 
 $customer_message = $data['name'] . " 様\n\n";
 $customer_message .= "この度は、Relightへお問い合わせいただき、誠にありがとうございます。\n";
@@ -104,7 +105,7 @@ $customer_message .= "Email: kenji.noto@relight-rl.com\n";
 $customer_message .= "Website: https://relight-rl.com\n";
 $customer_message .= "─────────────────────────";
 
-$customer_headers = "From: " . mb_encode_mimeheader('Relight', 'UTF-8') . " <kenji.noto@relight-rl.com>\r\n";
+$customer_headers = "From: Relight <kenji.noto@relight-rl.com>\r\n";
 $customer_headers .= "Reply-To: kenji.noto@relight-rl.com\r\n";
 $customer_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $customer_headers .= "Content-Transfer-Encoding: 8bit";

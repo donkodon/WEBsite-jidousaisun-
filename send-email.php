@@ -1,4 +1,8 @@
 <?php
+// 文字エンコード設定（最初に設定）
+mb_language('Japanese');
+mb_internal_encoding('UTF-8');
+
 // CORS設定
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
@@ -41,97 +45,71 @@ foreach ($required as $field) {
 // メール送信先
 $to = 'kenji.noto@relight-rl.com';
 
-// メール件名
-$subject = '【Relight】お問い合わせ: ' . $data['inquiryType'];
+// メール件名（エンコード）
+$subject = mb_encode_mimeheader('【Relight】お問い合わせ: ' . $data['inquiryType'], 'UTF-8');
 
 // メール本文
-$message = <<<EOT
-新しいお問い合わせがありました
-
-【会社名】
-{$data['company']}
-
-【お名前】
-{$data['name']}
-
-【メールアドレス】
-{$data['email']}
-
-【電話番号】
-{$data['phone']}
-
-【お問い合わせ種別】
-{$data['inquiryType']}
-
-【お問い合わせ内容】
-{$data['message']}
-
-【送信日時】
-EOT;
-$message .= "\n" . date('Y/m/d H:i:s');
+$message = "新しいお問い合わせがありました\n\n";
+$message .= "【会社名】\n";
+$message .= $data['company'] . "\n\n";
+$message .= "【お名前】\n";
+$message .= $data['name'] . "\n\n";
+$message .= "【メールアドレス】\n";
+$message .= $data['email'] . "\n\n";
+$message .= "【電話番号】\n";
+$message .= $data['phone'] . "\n\n";
+$message .= "【お問い合わせ種別】\n";
+$message .= $data['inquiryType'] . "\n\n";
+$message .= "【お問い合わせ内容】\n";
+$message .= $data['message'] . "\n\n";
+$message .= "【送信日時】\n";
+$message .= date('Y/m/d H:i:s');
 
 // メールヘッダー
-$headers = [
-    'From: Relight お問い合わせフォーム <kenji.noto@relight-rl.com>',
-    'Reply-To: ' . $data['email'],
-    'Content-Type: text/plain; charset=UTF-8'
-];
+$headers = "From: " . mb_encode_mimeheader('Relight お問い合わせフォーム', 'UTF-8') . " <kenji.noto@relight-rl.com>\r\n";
+$headers .= "Reply-To: " . $data['email'] . "\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$headers .= "Content-Transfer-Encoding: 8bit";
 
 // 1. 管理者へのメール送信
-$result1 = mb_send_mail($to, $subject, $message, implode("\r\n", $headers));
+$result1 = mb_send_mail($to, $subject, $message, $headers);
 
 // 2. お客様への確認メール
-$customer_subject = '【Relight】お問い合わせを受け付けました';
-$customer_message = <<<EOT
-{$data['name']} 様
+$customer_subject = mb_encode_mimeheader('【Relight】お問い合わせを受け付けました', 'UTF-8');
 
-この度は、Relightへお問い合わせいただき、誠にありがとうございます。
-以下の内容でお問い合わせを受け付けました。
+$customer_message = $data['name'] . " 様\n\n";
+$customer_message .= "この度は、Relightへお問い合わせいただき、誠にありがとうございます。\n";
+$customer_message .= "以下の内容でお問い合わせを受け付けました。\n\n";
+$customer_message .= "【会社名】\n";
+$customer_message .= $data['company'] . "\n\n";
+$customer_message .= "【お名前】\n";
+$customer_message .= $data['name'] . "\n\n";
+$customer_message .= "【メールアドレス】\n";
+$customer_message .= $data['email'] . "\n\n";
+$customer_message .= "【電話番号】\n";
+$customer_message .= $data['phone'] . "\n\n";
+$customer_message .= "【お問い合わせ種別】\n";
+$customer_message .= $data['inquiryType'] . "\n\n";
+$customer_message .= "【お問い合わせ内容】\n";
+$customer_message .= $data['message'] . "\n\n";
+$customer_message .= "【送信日時】\n";
+$customer_message .= date('Y/m/d H:i:s') . "\n\n";
+$customer_message .= "担当者より2営業日以内にご連絡させていただきます。\n";
+$customer_message .= "今しばらくお待ちくださいませ。\n\n";
+$customer_message .= "※このメールは自動送信されています。\n";
+$customer_message .= "このメールに返信いただいても対応できかねますので、ご了承ください。\n\n";
+$customer_message .= "─────────────────────────\n";
+$customer_message .= "Relight - EC出品自動化ソリューション\n";
+$customer_message .= "Email: kenji.noto@relight-rl.com\n";
+$customer_message .= "Website: https://relight-rl.com\n";
+$customer_message .= "─────────────────────────";
 
-【会社名】
-{$data['company']}
+$customer_headers = "From: " . mb_encode_mimeheader('Relight', 'UTF-8') . " <kenji.noto@relight-rl.com>\r\n";
+$customer_headers .= "Reply-To: kenji.noto@relight-rl.com\r\n";
+$customer_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$customer_headers .= "Content-Transfer-Encoding: 8bit";
 
-【お名前】
-{$data['name']}
-
-【メールアドレス】
-{$data['email']}
-
-【電話番号】
-{$data['phone']}
-
-【お問い合わせ種別】
-{$data['inquiryType']}
-
-【お問い合わせ内容】
-{$data['message']}
-
-【送信日時】
-EOT;
-$customer_message .= "\n" . date('Y/m/d H:i:s');
-$customer_message .= <<<EOT
-
-
-担当者より2営業日以内にご連絡させていただきます。
-今しばらくお待ちくださいませ。
-
-※このメールは自動送信されています。
-このメールに返信いただいても対応できかねますので、ご了承ください。
-
-─────────────────────────
-Relight - EC出品自動化ソリューション
-Email: kenji.noto@relight-rl.com
-Website: https://relight-rl.com
-─────────────────────────
-EOT;
-
-$customer_headers = [
-    'From: Relight <kenji.noto@relight-rl.com>',
-    'Reply-To: kenji.noto@relight-rl.com',
-    'Content-Type: text/plain; charset=UTF-8'
-];
-
-$result2 = mb_send_mail($data['email'], $customer_subject, $customer_message, implode("\r\n", $customer_headers));
+$result2 = mb_send_mail($data['email'], $customer_subject, $customer_message, $customer_headers);
 
 // 両方のメール送信結果を確認
 if ($result1 && $result2) {

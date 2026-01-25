@@ -46,10 +46,8 @@ foreach ($required as $field) {
 // メール送信先
 $to = 'kenji.noto@relight-rl.com';
 
-// メール件名（ISO-2022-JPエンコード）
-$subject_text = 'Relight お問い合わせ: ' . $data['inquiryType'];
-$subject = mb_convert_encoding($subject_text, 'ISO-2022-JP', 'UTF-8');
-$subject = mb_encode_mimeheader($subject, 'ISO-2022-JP');
+// メール件名（UTF-8で統一）
+$subject = mb_encode_mimeheader('Relight お問い合わせ: ' . $data['inquiryType'], 'UTF-8');
 
 // メール本文
 $message = "新しいお問い合わせがありました\n\n";
@@ -68,28 +66,19 @@ $message .= $data['message'] . "\n\n";
 $message .= "【送信日時】\n";
 $message .= date('Y/m/d H:i:s');
 
-// メールヘッダー（配列形式で定義）
-$headers = array(
-    'From: Relight <kenji.noto@relight-rl.com>',
-    'Reply-To: ' . $data['email'],
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=ISO-2022-JP',
-    'Content-Transfer-Encoding: 7bit',
-    'X-Mailer: PHP/' . phpversion()
-);
-$headers = implode("\r\n", $headers);
+// メールヘッダー（UTF-8で統一）
+$headers = "From: Relight <kenji.noto@relight-rl.com>\r\n";
+$headers .= "Reply-To: " . $data['email'] . "\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$headers .= "Content-Transfer-Encoding: 8bit";
 
-// メール本文をISO-2022-JPに変換
-$message_jis = mb_convert_encoding($message, 'ISO-2022-JP', 'UTF-8');
-
-// 1. 管理者へのメール送信
-$result1 = mb_send_mail($to, $subject, $message_jis, $headers);
+// 1. 管理者へのメール送信（-fオプション付き）
+$result1 = mb_send_mail($to, $subject, $message, $headers, "-f kenji.noto@relight-rl.com");
 
 // 2. お客様への確認メール
-// お客様向けメール件名（ISO-2022-JPエンコード）
-$customer_subject_text = 'Relight お問い合わせを受け付けました';
-$customer_subject = mb_convert_encoding($customer_subject_text, 'ISO-2022-JP', 'UTF-8');
-$customer_subject = mb_encode_mimeheader($customer_subject, 'ISO-2022-JP');
+// お客様向けメール件名（UTF-8で統一）
+$customer_subject = mb_encode_mimeheader('Relight お問い合わせを受け付けました', 'UTF-8');
 
 $customer_message = $data['name'] . " 様\n\n";
 $customer_message .= "この度は、Relightへお問い合わせいただき、誠にありがとうございます。\n";
@@ -118,21 +107,15 @@ $customer_message .= "Email: kenji.noto@relight-rl.com\n";
 $customer_message .= "Website: https://relight-rl.com\n";
 $customer_message .= "─────────────────────────";
 
-// お客様向けメールヘッダー（配列形式で定義）
-$customer_headers = array(
-    'From: Relight <kenji.noto@relight-rl.com>',
-    'Reply-To: kenji.noto@relight-rl.com',
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=ISO-2022-JP',
-    'Content-Transfer-Encoding: 7bit',
-    'X-Mailer: PHP/' . phpversion()
-);
-$customer_headers = implode("\r\n", $customer_headers);
+// お客様向けメールヘッダー（UTF-8で統一）
+$customer_headers = "From: Relight <kenji.noto@relight-rl.com>\r\n";
+$customer_headers .= "Reply-To: kenji.noto@relight-rl.com\r\n";
+$customer_headers .= "MIME-Version: 1.0\r\n";
+$customer_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$customer_headers .= "Content-Transfer-Encoding: 8bit";
 
-// お客様向けメール本文をISO-2022-JPに変換
-$customer_message_jis = mb_convert_encoding($customer_message, 'ISO-2022-JP', 'UTF-8');
-
-$result2 = mb_send_mail($data['email'], $customer_subject, $customer_message_jis, $customer_headers);
+// 2. お客様へのメール送信（-fオプション付き）
+$result2 = mb_send_mail($data['email'], $customer_subject, $customer_message, $customer_headers, "-f kenji.noto@relight-rl.com");
 
 // 両方のメール送信結果を確認
 if ($result1 && $result2) {

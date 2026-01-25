@@ -46,7 +46,7 @@ foreach ($required as $field) {
 $to = 'kenji.noto@relight-rl.com';
 
 // メール件名（エンコード）
-$subject = mb_encode_mimeheader('【Relight】お問い合わせ: ' . $data['inquiryType'], 'UTF-8');
+$subject = mb_encode_mimeheader('[Relight]お問い合わせ: ' . $data['inquiryType'], 'UTF-8', 'B');
 
 // メール本文
 $message = "新しいお問い合わせがありました\n\n";
@@ -75,7 +75,7 @@ $headers .= "Content-Transfer-Encoding: 8bit";
 $result1 = mb_send_mail($to, $subject, $message, $headers);
 
 // 2. お客様への確認メール
-$customer_subject = mb_encode_mimeheader('【Relight】お問い合わせを受け付けました', 'UTF-8');
+$customer_subject = mb_encode_mimeheader('[Relight]お問い合わせを受け付けました', 'UTF-8', 'B');
 
 $customer_message = $data['name'] . " 様\n\n";
 $customer_message .= "この度は、Relightへお問い合わせいただき、誠にありがとうございます。\n";

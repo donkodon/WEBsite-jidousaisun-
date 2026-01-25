@@ -1,0 +1,17 @@
+# 依存関係
+node_modules/
+package-lock.json
+
+# 一時ファイル
+*.zip
+test-*.php
+*.sh
+
+# 古いバージョンの画像
+images/*_aidrive.png
+images/*_clean.png
+images/*_correct.png
+images/*_generated.png
+images/*_new.png
+images/*_logo.png
+images/*_v2.png

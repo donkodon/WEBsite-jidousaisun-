@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relight デプロイパッケージ - ダウンロード</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .version {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .info-value {
+            color: #333;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .notes {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            font-size: 14px;
+            color: #856404;
+            margin-top: 20px;
+        }
+        
+        .notes strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .notes ul {
+            margin-left: 20px;
+        }
+        
+        .notes li {
+            margin: 5px 0;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">📦</div>
+        <h1>Relight デプロイパッケージ</h1>
+        <p class="version">バージョン 1.0 - 2026年1月29日</p>
+        
+        <div class="info-box">
+            <div class="info-row">
+                <span class="info-label">📄 ファイル名</span>
+                <span class="info-value">relight-deploy-package.zip</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">💾 ファイルサイズ</span>
+                <span class="info-value">14 MB</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">📦 含まれるファイル</span>
+                <span class="info-value">HTML×2, PHP×1, 画像×24</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">🎯 デプロイ先</span>
+                <span class="info-value">Xserver (relight-rl.com)</span>
+            </div>
+        </div>
+        
+        <a href="/relight-deploy-package.zip" class="download-btn" download>
+            ⬇️ ダウンロード開始
+        </a>
+        
+        <div class="notes">
+            <strong>📋 デプロイ前の確認事項：</strong>
+            <ul>
+                <li>ZIPファイルを解凍してください</li>
+                <li><code>DEPLOY_README.md</code> を必ず読んでください</li>
+                <li>メールアカウント <code>info@relight-rl.com</code> を作成してください</li>
+                <li>メール転送設定を行ってください（info → kenji.noto）</li>
+                <li>SPF/DKIM設定を忘れずに！</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            © 2026 Relight Inc. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>

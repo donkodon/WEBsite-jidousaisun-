@@ -1257,136 +1257,231 @@
             <!-- Tab Navigation -->
             <div class="flex justify-center mb-8">
                 <div class="inline-flex bg-white rounded-lg shadow-md p-1 border border-gray-200">
-                    <button id="tab-annual" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition bg-blue-600 text-white">
-                        年間契約
+                    <button id="tab-light" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition bg-blue-600 text-white">
+                        ライトプラン
                     </button>
-                    <button id="tab-monthly" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition text-gray-600 hover:text-gray-900">
-                        月次契約
+                    <button id="tab-standard" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition text-gray-600 hover:text-gray-900">
+                        スタンダードプラン
+                    </button>
+                    <button id="tab-premium" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition text-gray-600 hover:text-gray-900">
+                        プレミアムプラン
                     </button>
                 </div>
             </div>
 
             <div class="bg-white rounded-2xl shadow-xl overflow-x-auto">
-                <!-- Annual Plan Table (年間キャンペーン) -->
-                <table id="annual-table" class="w-full text-base pricing-table">
+                <!-- Light Plan Table -->
+                <table id="light-table" class="w-full text-base pricing-table">
                     <thead>
-                        <tr class="bg-gray-100 border-b-2 border-gray-300">
-                            <th colspan="4" class="py-4 px-6 text-left font-bold text-gray-700 text-lg">年間キャンペーン</th>
+                        <tr class="bg-gradient-to-r from-blue-500 to-blue-600 border-b-2 border-blue-700">
+                            <th colspan="3" class="py-4 px-6 text-left font-bold text-white text-xl">ライトプラン</th>
                         </tr>
                         <tr class="bg-gray-50 border-b border-gray-200">
                             <th class="py-3 px-4 text-left font-bold text-gray-700 border-r border-gray-200"></th>
-                            <th class="py-3 px-4 text-center font-bold text-blue-600 border-r border-gray-200 text-lg">ライトプラン</th>
-                            <th class="py-3 px-4 text-center font-bold text-blue-600 border-r border-gray-200 text-lg">スタンダードプラン</th>
-                            <th class="py-3 px-4 text-center font-bold text-blue-600 text-lg">プレミアムプラン</th>
+                            <th class="py-3 px-4 text-center font-bold text-blue-600 border-r border-gray-200 text-lg">年次契約</th>
+                            <th class="py-3 px-4 text-center font-bold text-blue-600 text-lg">月次契約</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
                         <tr class="border-b border-gray-200 bg-gray-50">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">月額料金</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥9,800</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥29,800</td>
-                            <td class="py-3 px-4 text-center font-bold text-blue-600">¥59,800</td>
+                            <td class="py-3 px-4 text-center font-bold text-blue-600">¥12,800</td>
                         </tr>
                         <tr class="border-b border-gray-200">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">作業点数/月</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">500点</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">2,000点</td>
-                            <td class="py-3 px-4 text-center">10,000点</td>
+                            <td class="py-3 px-4 text-center">500点</td>
                         </tr>
                         <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">単価/1点あたり</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">¥19.6</td>
+                            <td class="py-3 px-4 text-center">¥25.6</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">ダッシュボード</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
                             <td class="py-3 px-4 text-center">○</td>
                         </tr>
-                        <tr class="border-b border-gray-200">
+                        <tr class="border-b border-gray-200 bg-gray-50">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
                             <td class="py-3 px-4 text-center">○</td>
                         </tr>
-                        <tr class="border-b border-gray-200 bg-gray-50">
+                        <tr class="border-b border-gray-200">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動画像処理</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
                             <td class="py-3 px-4 text-center">○</td>
                         </tr>
-                        <tr class="border-b border-gray-200">
+                        <tr class="border-b border-gray-200 bg-gray-50">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
-                            <td class="py-3 px-4 text-center">○</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 bg-gray-50">
-                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
                             <td class="py-3 px-4 text-center">○</td>
                         </tr>
                         <tr class="border-b border-gray-200">
-                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
-                            <td class="py-3 px-4 text-center">○</td>
+                            <td class="py-3 px-4 text-center">-</td>
                         </tr>
                         <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動データ入力</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
                             <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
                         </tr>
-                        <tr class="border-b border-gray-200">
+                        <tr class="border-b border-gray-200 bg-gray-50">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
                             <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- Monthly Plan Table (通常) -->
-                <table id="monthly-table" class="w-full text-base pricing-table hidden">
+                <!-- Standard Plan Table -->
+                <table id="standard-table" class="w-full text-base pricing-table hidden">
                     <thead>
-                        <tr class="bg-gray-100 border-b-2 border-gray-300">
-                            <th colspan="4" class="py-4 px-6 text-left font-bold text-gray-700 text-lg">通常</th>
+                        <tr class="bg-gradient-to-r from-blue-600 to-blue-700 border-b-2 border-blue-800">
+                            <th colspan="3" class="py-4 px-6 text-left font-bold text-white text-xl">スタンダードプラン</th>
                         </tr>
                         <tr class="bg-gray-50 border-b border-gray-200">
                             <th class="py-3 px-4 text-left font-bold text-gray-700 border-r border-gray-200"></th>
-                            <th class="py-3 px-4 text-center font-bold text-blue-600 border-r border-gray-200 text-lg">ライトプラン</th>
-                            <th class="py-3 px-4 text-center font-bold text-blue-600 border-r border-gray-200 text-lg">スタンダードプラン</th>
-                            <th class="py-3 px-4 text-center font-bold text-blue-600 text-lg">プレミアムプラン</th>
+                            <th class="py-3 px-4 text-center font-bold text-blue-600 border-r border-gray-200 text-lg">年次契約</th>
+                            <th class="py-3 px-4 text-center font-bold text-blue-600 text-lg">月次契約</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
                         <tr class="border-b border-gray-200 bg-gray-50">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">月額料金</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥12,800</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥39,800</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥29,800</td>
+                            <td class="py-3 px-4 text-center font-bold text-blue-600">¥39,800</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">作業点数/月</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">2,000点</td>
+                            <td class="py-3 px-4 text-center">2,000点</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">単価/1点あたり</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">¥14.9</td>
+                            <td class="py-3 px-4 text-center">¥19.9</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">ダッシュボード</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動画像処理</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動データ入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Premium Plan Table -->
+                <table id="premium-table" class="w-full text-base pricing-table hidden">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-blue-700 to-blue-800 border-b-2 border-blue-900">
+                            <th colspan="3" class="py-4 px-6 text-left font-bold text-white text-xl">プレミアムプラン</th>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="py-3 px-4 text-left font-bold text-gray-700 border-r border-gray-200"></th>
+                            <th class="py-3 px-4 text-center font-bold text-blue-600 border-r border-gray-200 text-lg">年次契約</th>
+                            <th class="py-3 px-4 text-center font-bold text-blue-600 text-lg">月次契約</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">月額料金</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥59,800</td>
                             <td class="py-3 px-4 text-center font-bold text-blue-600">¥79,800</td>
                         </tr>
                         <tr class="border-b border-gray-200">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">作業点数/月</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">500点</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">2,000点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">10,000点</td>
                             <td class="py-3 px-4 text-center">10,000点</td>
                         </tr>
                         <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">単価/1点あたり</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">¥5.98</td>
+                            <td class="py-3 px-4 text-center">¥7.98</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">ダッシュボード</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
                             <td class="py-3 px-4 text-center">○</td>
                         </tr>
                         <tr class="border-b border-gray-200">
-                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動画像処理</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
                             <td class="py-3 px-4 text-center">○</td>
                         </tr>
                         <tr class="border-b border-gray-200 bg-gray-50">
-                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動画像処理</td>
-                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
                             <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
                             <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動データ入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">Coming Soon</td>
+                            <td class="py-3 px-4 text-center text-xs">Coming Soon</td>
+                        </tr>
+                    </tbody>
+                </table>
                         </tr>
                         <tr class="border-b border-gray-200">
                             <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
@@ -1611,31 +1706,44 @@
         });
 
         // --- Pricing Tab Switcher ---
-        const tabAnnual = document.getElementById('tab-annual');
-        const tabMonthly = document.getElementById('tab-monthly');
-        const annualTable = document.getElementById('annual-table');
-        const monthlyTable = document.getElementById('monthly-table');
+        const tabLight = document.getElementById('tab-light');
+        const tabStandard = document.getElementById('tab-standard');
+        const tabPremium = document.getElementById('tab-premium');
+        const lightTable = document.getElementById('light-table');
+        const standardTable = document.getElementById('standard-table');
+        const premiumTable = document.getElementById('premium-table');
         
-        tabAnnual.addEventListener('click', function() {
-            // Switch to annual
-            tabAnnual.classList.add('bg-blue-600', 'text-white');
-            tabAnnual.classList.remove('text-gray-600');
-            tabMonthly.classList.remove('bg-blue-600', 'text-white');
-            tabMonthly.classList.add('text-gray-600');
+        // Function to switch tabs
+        function switchTab(activeTab, activateTable) {
+            // Reset all tabs
+            [tabLight, tabStandard, tabPremium].forEach(tab => {
+                tab.classList.remove('bg-blue-600', 'text-white');
+                tab.classList.add('text-gray-600');
+            });
             
-            annualTable.classList.remove('hidden');
-            monthlyTable.classList.add('hidden');
+            // Hide all tables
+            [lightTable, standardTable, premiumTable].forEach(table => {
+                table.classList.add('hidden');
+            });
+            
+            // Activate selected tab
+            activeTab.classList.add('bg-blue-600', 'text-white');
+            activeTab.classList.remove('text-gray-600');
+            
+            // Show selected table
+            activateTable.classList.remove('hidden');
+        }
+        
+        tabLight.addEventListener('click', function() {
+            switchTab(tabLight, lightTable);
         });
         
-        tabMonthly.addEventListener('click', function() {
-            // Switch to monthly
-            tabMonthly.classList.add('bg-blue-600', 'text-white');
-            tabMonthly.classList.remove('text-gray-600');
-            tabAnnual.classList.remove('bg-blue-600', 'text-white');
-            tabAnnual.classList.add('text-gray-600');
-            
-            monthlyTable.classList.remove('hidden');
-            annualTable.classList.add('hidden');
+        tabStandard.addEventListener('click', function() {
+            switchTab(tabStandard, standardTable);
+        });
+        
+        tabPremium.addEventListener('click', function() {
+            switchTab(tabPremium, premiumTable);
         });
 
         // --- FAQ Accordion ---

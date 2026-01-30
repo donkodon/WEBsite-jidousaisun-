@@ -50,3 +50,14 @@
 10.64.8.0 - - [30/Jan/2026 15:00:56] "GET /privacy.html HTTP/1.1" 200 -
 10.64.8.0 - - [30/Jan/2026 15:00:56] code 404, message File not found
 10.64.8.0 - - [30/Jan/2026 15:00:56] "GET /favicon.ico HTTP/1.1" 404 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /index.html HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/ai_measure_phone.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/hero_bg.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/laurel_wreath_transparent.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/image_editing_interface_tshirt.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/feature_auto_measure_mobile.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/feature_background_removal.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:47] "GET /images/feature_model_generation.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:15:49] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.8.0 - - [30/Jan/2026 15:26:08] "GET /contact.html HTTP/1.1" 304 -

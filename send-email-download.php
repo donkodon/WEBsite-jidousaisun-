@@ -13,9 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // タイムスタンプ
     $timestamp = date('Y-m-d H:i:s');
     
-    // ★★★ 資料PDFのURL（ここを実際のURLに変更してください）★★★
-    $pdf_url = "https://yourdomain.com/downloads/relight-proposal.pdf";
-    // または相対パス: $pdf_url = "downloads/relight-proposal.pdf";
+    // Relightサービス資料（GenSparkスライド）
+    $pdf_url = "https://www.genspark.ai/slides?project_id=59999147-7a74-453d-bbcb-a9750f79de90";
     
     // ======================================
     // 1. ユーザーへ自動返信メール（PDFリンク付き）

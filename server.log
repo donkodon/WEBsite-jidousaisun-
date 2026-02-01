@@ -91,3 +91,65 @@
 10.64.8.0 - - [30/Jan/2026 17:10:13] "GET /images/feature_auto_measure_mobile.png HTTP/1.1" 200 -
 10.64.8.0 - - [30/Jan/2026 17:10:13] "GET /images/ai_model_comparison.png HTTP/1.1" 200 -
 10.64.8.0 - - [30/Jan/2026 17:10:14] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:10:09] "GET / HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:10:09] "GET /images/RELIGHT_icon.png HTTP/1.1" 304 -
+10.64.246.214 - - [31/Jan/2026 17:10:09] "GET /images/ai_measure_phone.png HTTP/1.1" 304 -
+10.64.246.214 - - [31/Jan/2026 17:10:09] "GET /images/laurel_wreath_transparent.png HTTP/1.1" 304 -
+10.64.246.214 - - [31/Jan/2026 17:10:10] "GET /images/bag_white_background.png HTTP/1.1" 304 -
+10.64.246.214 - - [31/Jan/2026 17:10:10] "GET /images/ai_model_comparison.png HTTP/1.1" 304 -
+10.64.246.214 - - [31/Jan/2026 17:10:10] "GET /images/image_editing_interface_tshirt.png HTTP/1.1" 304 -
+10.64.246.214 - - [31/Jan/2026 17:10:12] "GET /contact.html HTTP/1.1" 304 -
+10.64.246.214 - - [31/Jan/2026 17:10:18] "GET /index.html HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:10:20] "GET /download.html HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:10:40] code 501, message Unsupported method ('POST')
+10.64.246.214 - - [31/Jan/2026 17:10:40] "POST /send-email-download.php HTTP/1.1" 501 -
+10.64.246.214 - - [31/Jan/2026 17:10:41] code 404, message File not found
+10.64.246.214 - - [31/Jan/2026 17:10:41] "GET /favicon.ico HTTP/1.1" 404 -
+10.64.246.214 - - [31/Jan/2026 17:23:04] "GET /index.html HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:04] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:04] "GET /images/ai_measure_phone.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:05] "GET /images/laurel_wreath_transparent.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:05] "GET /images/hero_bg.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:05] "GET /images/feature_auto_measure_mobile.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:05] "GET /images/ai_model_comparison.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:05] "GET /images/bag_white_background.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:05] "GET /images/image_editing_interface_tshirt.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:06] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.246.214 - - [31/Jan/2026 17:23:15] code 501, message Unsupported method ('POST')
+10.64.246.214 - - [31/Jan/2026 17:23:15] "POST /send-email-download.php HTTP/1.1" 501 -
+10.64.246.214 - - [31/Jan/2026 17:23:15] code 404, message File not found
+10.64.246.214 - - [31/Jan/2026 17:23:15] "GET /favicon.ico HTTP/1.1" 404 -
+10.64.94.188 - - [01/Feb/2026 14:44:15] "GET /index.html HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:15] "GET /images/RELIGHT_icon.png HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:15] "GET /images/ai_measure_phone.png HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:15] "GET /images/image_editing_interface_tshirt.png HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:15] "GET /images/laurel_wreath_transparent.png HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:15] "GET /images/bag_white_background.png HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:15] "GET /images/ai_model_comparison.png HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:52] "GET / HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:44:55] "GET /download.html HTTP/1.1" 304 -
+10.64.94.188 - - [01/Feb/2026 14:45:09] code 501, message Unsupported method ('POST')
+10.64.94.188 - - [01/Feb/2026 14:45:09] "POST /send-email-download.php HTTP/1.1" 501 -
+10.64.94.188 - - [01/Feb/2026 14:45:09] code 404, message File not found
+10.64.94.188 - - [01/Feb/2026 14:45:09] "GET /favicon.ico HTTP/1.1" 404 -
+10.64.94.188 - - [01/Feb/2026 15:14:15] "GET /download.html HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /index.html HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/ai_measure_phone.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/laurel_wreath_transparent.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/hero_bg.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/image_editing_interface_tshirt.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/ai_model_comparison.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/bag_white_background.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:20] "GET /images/feature_auto_measure_mobile.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:26:22] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:19] "GET /index.html HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/ai_measure_phone.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/hero_bg.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/laurel_wreath_transparent.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/bag_white_background.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/feature_auto_measure_mobile.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/ai_model_comparison.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:20] "GET /images/image_editing_interface_tshirt.png HTTP/1.1" 200 -
+10.64.94.188 - - [01/Feb/2026 15:57:21] "GET /images/RELIGHT_icon.png HTTP/1.1" 200 -

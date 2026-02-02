@@ -1339,9 +1339,129 @@
                             <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
                             <td class="py-3 px-4 text-center">無料</td>
                         </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">OCR入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
                     </tbody>
                 </table>
 
+                <!-- Premium Plan Table -->
+                <table id="premium-table" class="w-full text-base pricing-table hidden">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-blue-700 to-blue-800 border-b-2 border-blue-900">
+                            <th colspan="8" class="py-4 px-6 text-center font-bold text-white text-xl">プレミアムプラン - 単価: ¥100/点</th>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="py-3 px-4 text-left font-bold text-gray-700 border-r border-gray-200">作業点数</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">100点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">500点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">1,000点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">2,500点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">5,000点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">10,000点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700">20,000点</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">月額料金</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥10,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥50,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥100,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥250,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥500,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥900,000</td>
+                            <td class="py-3 px-4 text-center font-bold text-blue-600">¥1,700,000</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">単価</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥90/点</td>
+                            <td class="py-3 px-4 text-center text-gray-600">¥85/点</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">ダッシュボード</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">画像編集</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">要見積</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">要見積</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">要見積</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
+                            <td class="py-3 px-4 text-center">無料</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -1397,7 +1517,7 @@
                         <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
                     </button>
                     <div class="faq-content hidden p-6 bg-white text-gray-600 border-t border-gray-200 leading-relaxed">
-                        はい、ございます。マニュアルのご提供はもちろん、プランに応じてチャットサポートやメールサポートをご利用いただけます。
+                        はい、ございます。マニュアルのご提供はもちろん、プランに応じてチャットサポートやメールサポートをご利用いただけます。また、プレミアムプランでは専任の担当者が導入から運用まで伴走支援いたします。
                     </div>
                 </div>
             </div>

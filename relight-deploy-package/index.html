@@ -190,7 +190,7 @@
                         <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition flex items-center justify-center gap-2">
                             無料でデモを試す <i class="fa-solid fa-arrow-right"></i>
                         </a>
-                        <a href="contact.html" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white border border-white/50 px-8 py-4 rounded-lg font-bold text-lg transition">
+                        <a href="download.html" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white border border-white/50 px-8 py-4 rounded-lg font-bold text-lg transition">
                             資料ダウンロード
                         </a>
                     </div>
@@ -278,7 +278,42 @@
                     </div>
                 </div>
 
+                <!-- Divider for Mobile -->
+                <div class="w-16 h-px bg-gray-200 md:hidden"></div>
+                <!-- Divider for Desktop -->
+                <div class="hidden md:block w-px h-16 lg:h-24 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+
+                <!-- Achievement 3 -->
+                <div class="flex items-center justify-center relative px-1 w-full md:w-auto">
+                    <!-- Left Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -mr-6 md:-mr-8 z-0">
+                         <img src="images/laurel_wreath_transparent.png" alt="Laurel Wreath Left" class="w-full h-full object-contain opacity-90" style="transform: scale(1.1, 1.3);">
+                    </div>
+                    
+                    <!-- Center Content -->
+                    <div class="flex flex-col items-center mx-1 z-10 flex-shrink-0 min-w-[120px] py-2 relative top-1">
+                        <p class="text-sm md:text-sm lg:text-base font-bold text-gray-700 mb-1 lg:mb-2 tracking-widest text-center whitespace-nowrap">
+                            お客様満足度
+                        </p>
+                        <div class="flex flex-col items-center -mt-2 lg:-mt-3">
+                            <div class="flex items-baseline">
+                                <span class="text-yellow-500 text-2xl md:text-3xl lg:text-4xl mr-1">★</span>
+                                <span class="text-4xl md:text-5xl lg:text-7xl font-bold text-blue-700 font-sans tracking-tight drop-shadow-sm">4.5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Wreath Image -->
+                    <div class="w-16 h-24 md:w-16 md:h-28 lg:w-24 lg:h-40 flex-shrink-0 flex items-center justify-center -ml-6 md:-ml-8 z-0">
+                         <img src="images/laurel_wreath_transparent.png" alt="Laurel Wreath Right" class="w-full h-full object-contain opacity-90" style="transform: scaleX(-1) scale(1.1, 1.3);">
+                    </div>
+                </div>
+
             </div>
+
+            <p class="text-center md:text-right text-[10px] text-gray-400 mt-10 max-w-6xl mx-auto">
+                ※自社調べ（2025年7月） / 導入効果には個人差があります
+            </p>
         </div>
         
         <style>
@@ -749,6 +784,22 @@
                     </div>
                 </div>
 
+                <!-- Feature 9: 着用画像生成 -->
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-blue-100 flex items-center justify-between hover:shadow-md transition duration-300 cursor-pointer group relative overflow-hidden">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-rose-50 rounded-lg flex items-center justify-center text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition duration-300">
+                            <i class="fa-solid fa-shirt text-xl"></i>
+                        </div>
+                        <span class="font-bold text-slate-700 text-sm md:text-base group-hover:text-rose-600 transition duration-300">着用画像生成</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-blue-300 text-sm group-hover:text-rose-600 group-hover:translate-x-1 transition duration-300"></i>
+                    
+                    <!-- Badge -->
+                    <div class="absolute -top-1 -right-8 bg-yellow-400 text-yellow-900 text-[10px] font-bold py-1 w-24 text-center rotate-45 shadow-sm">
+                        準備中
+                    </div>
+                </div>
+
             </div>
 
             <!-- Additional Info -->
@@ -790,7 +841,7 @@
                 </a>
 
                 <!-- Download Button (Filled) -->
-                <a href="contact.html" class="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 rounded-full bg-white text-blue-600 font-bold text-base md:text-lg hover:bg-blue-50 hover:shadow-2xl transition duration-300 flex items-center justify-center gap-3 group">
+                <a href="download.html" class="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 rounded-full bg-white text-blue-600 font-bold text-base md:text-lg hover:bg-blue-50 hover:shadow-2xl transition duration-300 flex items-center justify-center gap-3 group">
                     資料ダウンロード
                     <i class="fa-solid fa-download text-sm group-hover:translate-y-1 transition duration-300"></i>
                 </a>
@@ -827,80 +878,65 @@
         <!-- Feature 1: Background Removal -->
         <section class="py-20 border-b border-gray-100">
             <div class="container mx-auto px-6">
-                <div class="flex flex-col gap-12">
-                    <!-- Top Section: Title and Chart Side by Side -->
-                    <div class="flex flex-col md:flex-row items-start gap-12 lg:gap-20">
-                        <div class="md:w-1/2 order-2 md:order-1">
-                            <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">ONE-CLICK BACKGROUND REMOVAL</span>
-                            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
-                                プロ級の白抜き画像を、<br>瞬時に。
-                            </h2>
-                            <p class="text-gray-600 mb-8 leading-relaxed">
-                                高度なAIアルゴリズムが、複雑な境界線や半透明な素材も正確に認識。髪の毛のディテールを自然に残したまま、ECサイトに最適な白背景画像を作成します。
-                            </p>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
-                                    <span class="text-gray-700 font-medium">髪の毛やファー素材などの複雑な境界線も高精度に切り抜き</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
-                                    <span class="text-gray-700 font-medium">大量の画像も一括アップロードで処理可能</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="md:w-1/2 order-1 md:order-2">
-                            <!-- Success Rate Comparison Chart -->
-                            <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-6 border border-blue-100">
-                                <h3 class="text-center font-bold text-gray-800 mb-4 text-lg">白抜き成功率の比較</h3>
-                                <div class="h-[280px]">
-                                    <canvas id="successRateChart"></canvas>
-                                </div>
-                                <p class="text-center text-xs text-gray-500 mt-3">※当社調べ（複雑な境界線を含む商品画像1000点での検証結果）</p>
-                            </div>
-                        </div>
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <div class="md:w-1/2 order-2 md:order-1">
+                        <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">ONE-CLICK BACKGROUND REMOVAL</span>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                            プロ級の白抜き画像を、<br>瞬時に。
+                        </h2>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            高度なAIアルゴリズムが、複雑な境界線や半透明な素材も正確に認識。髪の毛のディテールや商品の影を自然に残したまま、ECサイトに最適な白背景画像を作成します。
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">髪の毛やファー素材などの複雑な境界線も高精度に切り抜き</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">自然な影（ドロップシャドウ）を保持・生成し、立体感を損なわない</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-regular fa-circle-check text-green-500 text-xl mt-1"></i>
+                                <span class="text-gray-700 font-medium">大量の画像も一括アップロードで処理可能</span>
+                            </li>
+                        </ul>
                     </div>
-                    
-                    <!-- Bottom Section: Bag Image and Upload Button -->
-                    <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-                        <div class="md:w-1/2">
-                            <!-- Bag Image -->
-                            <div class="rounded-2xl shadow-2xl overflow-hidden bg-white border border-gray-200 p-4">
-                                <img id="backgroundRemovalImage" src="images/bag_white_background.png" alt="バッグ白抜きデモ" class="w-full h-auto rounded-xl">
-                            </div>
+                    <div class="md:w-1/2 order-1 md:order-2">
+                        <div class="rounded-2xl shadow-2xl overflow-hidden bg-white border border-gray-200 p-4">
+                            <img id="backgroundRemovalImage" src="images/bag_white_background.png" alt="バッグ白抜きデモ" class="w-full h-auto rounded-xl">
                         </div>
-                        <div class="md:w-1/2 flex flex-col">
-                            <!-- Image Upload Section -->
-                            <div class="flex-1 flex flex-col space-y-4">
-                                <!-- Upload Button (Full Height) -->
-                                <div class="relative flex-1 flex items-center justify-center">
-                                    <input type="file" id="imageUploadInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-                                    <label for="imageUploadInput" class="w-full h-full min-h-[400px] flex flex-col items-center justify-center gap-4 px-6 py-12 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-xl rounded-xl cursor-pointer hover:from-blue-700 hover:to-blue-600 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]">
-                                        <i class="fa-solid fa-cloud-arrow-up text-6xl"></i>
-                                        <span class="text-center">背景削除を試してみる</span>
-                                    </label>
-                                </div>
-                                
-                                <!-- Preview Area -->
-                                <div id="imagePreviewContainer" class="hidden">
-                                    <div class="rounded-xl border-2 border-dashed border-gray-300 p-4 bg-gray-50">
-                                        <div class="flex items-start gap-4">
-                                            <div class="flex-shrink-0">
-                                                <img id="imagePreview" src="" alt="プレビュー" class="w-32 h-32 object-cover rounded-lg shadow-md">
-                                            </div>
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-sm font-semibold text-gray-900 mb-1" id="imageFileName">ファイル名</p>
-                                                <p class="text-xs text-gray-500 mb-3" id="imageFileSize">サイズ: 0KB</p>
-                                                <div class="flex gap-2">
-                                                    <button onclick="applyUploadedImage(event)" class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition duration-200">
-                                                        <i class="fa-solid fa-check mr-1"></i>
-                                                        適用する
-                                                    </button>
-                                                    <button onclick="clearImageUpload()" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-300 transition duration-200">
-                                                        <i class="fa-solid fa-xmark mr-1"></i>
-                                                        キャンセル
-                                                    </button>
-                                                </div>
+                        
+                        <!-- Image Upload Section -->
+                        <div class="mt-6 space-y-4">
+                            <!-- Upload Button -->
+                            <div class="relative">
+                                <input type="file" id="imageUploadInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                                <label for="imageUploadInput" class="flex items-center justify-center gap-3 px-6 py-8 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-lg rounded-xl cursor-pointer hover:from-blue-700 hover:to-blue-600 transition duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    <i class="fa-solid fa-cloud-arrow-up text-2xl"></i>
+                                    <span>画像をアップロードする</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Preview Area -->
+                            <div id="imagePreviewContainer" class="hidden">
+                                <div class="rounded-xl border-2 border-dashed border-gray-300 p-4 bg-gray-50">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <img id="imagePreview" src="" alt="プレビュー" class="w-32 h-32 object-cover rounded-lg shadow-md">
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-semibold text-gray-900 mb-1" id="imageFileName">ファイル名</p>
+                                            <p class="text-xs text-gray-500 mb-3" id="imageFileSize">サイズ: 0KB</p>
+                                            <div class="flex gap-2">
+                                                <button onclick="applyUploadedImage(event)" class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition duration-200">
+                                                    <i class="fa-solid fa-check mr-1"></i>
+                                                    適用する
+                                                </button>
+                                                <button onclick="clearImageUpload()" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-300 transition duration-200">
+                                                    <i class="fa-solid fa-xmark mr-1"></i>
+                                                    キャンセル
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -1089,6 +1125,74 @@
             </div>
         </section>
 
+        <!-- Feature 6: Model Generation -->
+        <section class="py-24 border-b border-gray-100 bg-white">
+            <div class="container mx-auto px-6">
+                
+                <div class="max-w-6xl mx-auto">
+                    <!-- Main Visual Area -->
+                    <div class="bg-gray-50 rounded-3xl p-8 md:p-12 mb-16 border border-gray-100 shadow-sm">
+                        <div class="flex flex-col md:flex-row items-center gap-12">
+                            <!-- Image Side -->
+                            <div class="w-full md:w-1/2">
+                                <div class="relative rounded-xl overflow-hidden shadow-2xl ring-4 ring-white">
+                                    <img src="images/ai_model_comparison.png" alt="AIモデル生成比較" class="w-full h-auto">
+                                    <!-- Optional: Label Overlay -->
+                                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg text-sm font-bold shadow-sm text-gray-800">
+                                        <i class="fa-solid fa-wand-magic-sparkles text-blue-600 mr-2"></i>生成イメージ
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Text/Value Prop Side -->
+                            <div class="w-full md:w-1/2">
+                                <!-- Header -->
+                                <div class="mb-8">
+                                    <span class="text-blue-600 font-bold text-xs tracking-wider uppercase mb-3 block">AI MODEL GENERATION</span>
+                                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">
+                                        商品のモデル着用画像を<br>AIで生成
+                                    </h2>
+                                </div>
+                                
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6">
+                                    <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">撮影コストをゼロに。</span><br>
+                                    売れるクリエイティブを量産。
+                                </h3>
+                                <div class="space-y-6">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+                                            <i class="fa-solid fa-shirt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">商品画像を用意するだけ</h4>
+                                            <p class="text-sm text-gray-600 mt-1">ハンガーに掛けた状態や平置きの写真があればOK。特別な撮影機材は不要です。</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+                                            <i class="fa-solid fa-bolt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">数秒で生成完了</h4>
+                                            <p class="text-sm text-gray-600 mt-1">AIが商品の特徴を理解し、自然な着用感を再現。待ち時間なくバリエーションを作成できます。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Description Text -->
+                    <div class="text-center mb-16">
+                        <p class="text-gray-600 leading-relaxed text-lg max-w-3xl mx-auto">
+                            商品を平置きで撮影するだけで、AIが架空のモデルが着用しているかのような画像を生成します。<br>
+                            モデルの撮影コストやスケジュール調整の手間を削減し、魅力的な着用イメージを作成できます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <!-- Cost Performance Section -->
@@ -1150,6 +1254,9 @@
                     </button>
                     <button id="tab-standard" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition text-gray-600 hover:text-gray-900">
                         スタンダードプラン
+                    </button>
+                    <button id="tab-premium" class="pricing-tab px-8 py-3 rounded-lg font-bold text-lg transition text-gray-600 hover:text-gray-900">
+                        プレミアムプラン
                     </button>
                 </div>
             </div>
@@ -1253,6 +1360,26 @@
                             <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
                             <td class="py-3 px-4 text-center">無料</td>
                         </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">OCR入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -1354,70 +1481,149 @@
                             <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
                             <td class="py-3 px-4 text-center">無料</td>
                         </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">OCR入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">-</td>
+                            <td class="py-3 px-4 text-center">-</td>
+                        </tr>
                     </tbody>
                 </table>
 
-            </div>
-        </div>
-    </section>
-
-    <!-- Beta Recruitment Section -->
-    <section class="py-24 bg-gradient-to-r from-blue-900 to-indigo-900 text-white relative overflow-hidden">
-        <!-- Background Decoration -->
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-blue-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-purple-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
-                <!-- Text Content -->
-                <div class="lg:w-3/5">
-                    <div class="inline-block bg-blue-500/20 border border-blue-400/30 rounded-full px-4 py-1 mb-6 backdrop-blur-sm">
-                        <span class="text-blue-200 font-bold text-sm tracking-wider uppercase">LIMITED OFFER</span>
-                    </div>
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">ベータ版ユーザー</span><br>
-                        先行募集中
-                    </h2>
-                    <p class="text-lg text-blue-100 mb-8 leading-relaxed">
-                        Relightの正式リリースに向けて、アプリの改善にご協力いただけるベータ版ユーザー様を募集しています。<br>
-                        実際の業務でご利用いただきながら、フィードバックをいただける企業様には特別な特典をご用意しております。
-                    </p>
-                    
-                    <div class="grid sm:grid-cols-2 gap-6 mb-8">
-                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10">
-                            <div class="text-yellow-400 text-xl mb-3">
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                            <h3 class="font-bold text-lg mb-2">全機能を無料で利用可能</h3>
-                            <p class="text-sm text-blue-200">ベータ期間中は、有料プランを含むすべての機能を制限なくご利用いただけます。</p>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10">
-                            <div class="text-yellow-400 text-xl mb-3">
-                                <i class="fa-solid fa-gift"></i>
-                            </div>
-                            <h3 class="font-bold text-lg mb-2">正規版の特別割引</h3>
-                            <p class="text-sm text-blue-200">正式リリース後、ご協力いただいたお礼として永年特別割引価格でご提供します。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Call to Action -->
-                <div class="lg:w-2/5 w-full">
-                    <div class="bg-white text-gray-900 rounded-2xl p-8 shadow-2xl transform hover:scale-[1.02] transition duration-300">
-                        <h3 class="text-2xl font-bold mb-4 text-center">今すぐ応募する</h3>
-                        
-                        <form onsubmit="event.preventDefault(); window.location.href='contact.html';" class="space-y-4">
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300 flex items-center justify-center gap-2 group">
-                                ベータ版に応募する
-                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
-                            </button>
-                        </form>
-                        <p class="text-xs text-center text-gray-400 mt-4">
-                            ※応募多数の場合は抽選とさせていただきます。<br>
-                            ※当選者の方には3営業日以内にご連絡いたします。
-                        </p>
-                    </div>
-                </div>
+                <!-- Premium Plan Table -->
+                <table id="premium-table" class="w-full text-base pricing-table hidden">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-blue-700 to-blue-800 border-b-2 border-blue-900">
+                            <th colspan="8" class="py-4 px-6 text-center font-bold text-white text-xl">プレミアムプラン - 単価: ¥100/点</th>
+                        </tr>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="py-3 px-4 text-left font-bold text-gray-700 border-r border-gray-200">作業点数</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">100点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">500点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">1,000点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">2,500点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">5,000点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700 border-r border-gray-200">10,000点</th>
+                            <th class="py-3 px-4 text-center font-bold text-gray-700">20,000点</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">月額料金</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥10,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥50,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥100,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥250,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥500,000</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 font-bold text-blue-600">¥900,000</td>
+                            <td class="py-3 px-4 text-center font-bold text-blue-600">¥1,700,000</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">単価</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥100/点</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-gray-600">¥90/点</td>
+                            <td class="py-3 px-4 text-center text-gray-600">¥85/点</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">ダッシュボード</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">リネーム</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">画像編集</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">白抜き</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">自動採寸</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">カスタマイズ</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">要見積</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">要見積</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200 text-xs">要見積</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">無料</td>
+                            <td class="py-3 px-4 text-center">無料</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">OCR入力</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-3 px-4 font-bold text-left border-r border-gray-200">着用画像生成</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center border-r border-gray-200">○</td>
+                            <td class="py-3 px-4 text-center">○</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -1473,7 +1679,7 @@
                         <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
                     </button>
                     <div class="faq-content hidden p-6 bg-white text-gray-600 border-t border-gray-200 leading-relaxed">
-                        はい、ございます。マニュアルのご提供はもちろん、プランに応じてチャットサポートやメールサポートをご利用いただけます。
+                        はい、ございます。マニュアルのご提供はもちろん、プランに応じてチャットサポートやメールサポートをご利用いただけます。また、プレミアムプランでは専任の担当者が導入から運用まで伴走支援いたします。
                     </div>
                 </div>
             </div>
@@ -1494,7 +1700,7 @@
                 <a href="contact.html" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition">
                     お問い合わせ
                 </a>
-                <a href="contact.html" class="bg-blue-800/50 hover:bg-blue-800 border border-blue-400 text-white px-8 py-4 rounded-lg font-bold text-lg transition">
+                <a href="download.html" class="bg-blue-800/50 hover:bg-blue-800 border border-blue-400 text-white px-8 py-4 rounded-lg font-bold text-lg transition">
                     資料ダウンロード
                 </a>
             </div>
@@ -1542,156 +1748,73 @@
 
     <!-- Scripts -->
     <script>
-        // --- Chart initialization ---
+        // --- Cost Performance Chart ---
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Success Rate Chart ---
-            const successCtx = document.getElementById('successRateChart');
-            if (successCtx) {
-                new Chart(successCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['他社A', '他社B', 'Relight'],
-                        datasets: [{
-                            label: '白抜き成功率',
-                            data: [50, 60, 90],
-                            backgroundColor: [
-                                '#94a3b8', // Gray for 他社A
-                                '#64748b', // Darker Gray for 他社B
-                                '#2563eb'  // Blue (Highlight) for Relight
-                            ],
-                            borderRadius: 8,
-                            barThickness: 60,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                enabled: true,
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.parsed.y + '%';
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100,
-                                grid: { 
-                                    color: '#e5e7eb',
-                                    drawBorder: false
-                                },
-                                ticks: { 
-                                    font: { 
-                                        size: 11, 
-                                        family: "'Noto Sans JP', sans-serif" 
-                                    },
-                                    callback: function(value) {
-                                        return value + '%';
-                                    }
-                                }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { 
-                                    font: { 
-                                        size: 12, 
-                                        family: "'Noto Sans JP', sans-serif",
-                                        weight: 'bold'
-                                    }
-                                }
-                            }
-                        },
-                        animation: {
-                            duration: 2000,
-                            easing: 'easeOutQuart'
-                        }
-                    },
-                    plugins: [{
-                        afterDatasetsDraw: function(chart) {
-                            const ctx = chart.ctx;
-                            chart.data.datasets.forEach(function(dataset, i) {
-                                const meta = chart.getDatasetMeta(i);
-                                meta.data.forEach(function(bar, index) {
-                                    const data = dataset.data[index];
-                                    ctx.fillStyle = '#1f2937';
-                                    ctx.font = 'bold 16px "Noto Sans JP"';
-                                    ctx.textAlign = 'center';
-                                    ctx.textBaseline = 'bottom';
-                                    ctx.fillText(data + '%', bar.x, bar.y - 5);
-                                });
-                            });
-                        }
-                    }]
-                });
-            }
+            const ctx = document.getElementById('costChart').getContext('2d');
             
-            // --- Cost Performance Chart ---
-            const ctx = document.getElementById('costChart');
-            if (ctx) {
-                new Chart(ctx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['従来の人力作業', '他社ツールA', '他社ツールB', 'Relight'],
-                        datasets: [{
-                            label: '1商品あたりの処理コスト',
-                            data: [1000, 700, 500, 100], // Relative values based on image
-                            backgroundColor: [
-                                '#94a3b8', // Gray
-                                '#64748b', // Darker Gray
-                                '#475569', // Darkest Gray
-                                '#2563eb'  // Blue (Highlight)
-                            ],
-                            borderRadius: 8,
-                            barThickness: 40,
-                        }]
+            // Custom plugin to draw rounded corners for bar chart
+            // Note: Chart.js v3+ supports borderRadius natively, but let's keep it simple
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['従来の人力作業', '他社ツールA', '他社ツールB', 'Relight'],
+                    datasets: [{
+                        label: '1商品あたりの処理コスト',
+                        data: [1000, 700, 500, 100], // Relative values based on image
+                        backgroundColor: [
+                            '#94a3b8', // Gray
+                            '#64748b', // Darker Gray
+                            '#475569', // Darkest Gray
+                            '#2563eb'  // Blue (Highlight)
+                        ],
+                        borderRadius: 8,
+                        barThickness: 40,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: { enabled: false }
+                    scales: {
+                        y: {
+                            display: false,
+                            grid: { display: false }
                         },
-                        scales: {
-                            y: {
-                                display: false,
-                                grid: { display: false }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { font: { size: 10, family: "'Noto Sans JP', sans-serif" } }
-                            }
-                        },
-                        animation: {
-                            duration: 2000,
-                            easing: 'easeOutQuart'
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 10, family: "'Noto Sans JP', sans-serif" } }
                         }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
                     }
-                });
-            }
+                }
+            });
         });
 
         // --- Pricing Tab Switcher ---
         const tabLight = document.getElementById('tab-light');
         const tabStandard = document.getElementById('tab-standard');
+        const tabPremium = document.getElementById('tab-premium');
         const lightTable = document.getElementById('light-table');
         const standardTable = document.getElementById('standard-table');
+        const premiumTable = document.getElementById('premium-table');
         
         // Function to switch tabs
         function switchTab(activeTab, activateTable) {
             // Reset all tabs
-            [tabLight, tabStandard].forEach(tab => {
+            [tabLight, tabStandard, tabPremium].forEach(tab => {
                 tab.classList.remove('bg-blue-600', 'text-white');
                 tab.classList.add('text-gray-600');
             });
             
             // Hide all tables
-            [lightTable, standardTable].forEach(table => {
+            [lightTable, standardTable, premiumTable].forEach(table => {
                 table.classList.add('hidden');
             });
             
@@ -1709,6 +1832,10 @@
         
         tabStandard.addEventListener('click', function() {
             switchTab(tabStandard, standardTable);
+        });
+        
+        tabPremium.addEventListener('click', function() {
+            switchTab(tabPremium, premiumTable);
         });
 
         // --- FAQ Accordion ---
